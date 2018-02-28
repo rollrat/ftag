@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileIcon\FolderIcon.cs" />
+    <Compile Include="FileIcon\IconHelper.cs" />
+    <Compile Include="FileIcon\IconListManager.cs" />
+    <Compile Include="FileIndexor\FileIndexor.cs" />
+    <Compile Include="FileIndexor\FileIndexorNode.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -83,6 +89,21 @@
       <Project>{79624cec-bc52-47ea-ab14-4a16a244181f}</Project>
       <Name>ftag</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

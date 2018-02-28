@@ -16,21 +16,17 @@ namespace ftag
 {
     public class FTagStream
     {
-        //FileStream fs;
-        //StreamReader reader;
-        //StreamWriter writer;
         Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
-        //Dictionary<string, Tuple<int,int>> pos = new Dictionary<string, Tuple<int, int>>();
 
         string source;
         string path;
 
         public FTagStream(string FolderName)
         {
-            path = FolderName + "\\.ftag";
-
-            //fs = File.Open(path, FileMode.OpenOrCreate);
-            //reader = new StreamReader(fs, Encoding.BigEndianUnicode);
+            if (FolderName.EndsWith("\\"))
+                path = FolderName + ".ftag";
+            else
+                path = FolderName + "\\.ftag";
 
             if (File.Exists(path))
             {
@@ -41,9 +37,6 @@ namespace ftag
 
         private void parseFTag()
         {
-            //fs.Seek(0, SeekOrigin.Begin);
-            //source = reader.ReadToEnd();
-
             for (int i = 0; i < source.Length; i++)
             {
                 StringBuilder subpath = new StringBuilder();
@@ -51,8 +44,7 @@ namespace ftag
 
                 while (source[i++] != '{' && i < source.Length);
                 if (i == source.Length) return;
-
-                //int startat = i;
+                
                 while (Char.IsWhiteSpace(source[i])) i++;
                 if (source[i] == '\"')
                 {
@@ -68,13 +60,9 @@ namespace ftag
                 }
 
                 while (source[++i] != '}') ;
-
-                //int endat = i;
-
+                
                 dic.Add(subpath.ToString(),
                     new FTagObject(subpath.ToString(), tags.ToString()));
-                //pos.Add(subpath.ToString(),
-                //    new Tuple<int, int>(startat, endat - startat + 1));
             }
         }
 
@@ -83,10 +71,27 @@ namespace ftag
             get { return dic[key].Tags; }
             set {
                 if (!dic.ContainsKey(key))
-                    dic.Add(key, new FTagObject(key,value));
-                else dic[key].Tags = value;
-                SaveFormat();
+                    dic.Add(key, new FTagObject(key, value));
+                else
+                    dic[key].Tags = value;
+                if (value.Count == 0)
+                    dic.Remove(key);
+                Save();
             }
+        }
+
+        public List<FTagObject> GetTagList()
+        {
+            List<FTagObject> tags = new List<FTagObject>();
+            foreach (var pair in dic) {
+                tags.Add(pair.Value);
+            }
+            return tags;
+        }
+
+        public bool Contains(string key)
+        {
+            return dic.ContainsKey(key);
         }
 
         public void Save()
@@ -120,26 +125,5 @@ namespace ftag
 
             File.WriteAllText(path, builder.ToString());
         }
-
-        //private void updateFTag(string subpath, FTagObject tag)
-        //{
-        //    if (!dic.ContainsKey(subpath))
-        //    {
-        //        dic.Add(subpath, tag);
-        //        // TODO: something
-        //        return;
-        //    }
-
-        //    int wwxx = writer.Encoding.GetByteCount("1");
-        //    fs.Seek(pos[subpath].Item1 * wwxx, SeekOrigin.Begin);
-
-        //    string xxx = dic[subpath].ToString();
-        //    string yyy = tag.ToString();
-
-        //    if (xxx.Length > yyy.Length)
-        //    {
-
-        //    }
-        //}
     }
 }
