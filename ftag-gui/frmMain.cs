@@ -50,6 +50,7 @@ namespace ftag_gui
         {
         }
 
+        #region [--- Folder Open ---]
         private void bFolder_Click(object sender, System.EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -78,12 +79,10 @@ namespace ftag_gui
                 FileIndexorNode node = fx.GetPathNode(tbPath.Text);
                 foreach (FileIndexorNode n in node.Nodes) {
                     make_node(tvTags.Nodes, Path.GetFileName(n.Path.Remove(n.Path.Length - 1)));
-                    //tvTags.Nodes.Add(Path.GetFileName(n.Path.Remove(n.Path.Length-1)));
                     make_tree(n, tvTags.Nodes[tvTags.Nodes.Count-1]);
                 }
                 foreach (FileInfo f in new DirectoryInfo(node.Path).GetFiles())
                     make_node(tvTags.Nodes, f.Name);
-                    //tvTags.Nodes.Add(f.Name);
                 color_node(tvTags.Nodes);
                 UpdateTagsRank();
             });
@@ -92,7 +91,6 @@ namespace ftag_gui
         {
             foreach (FileIndexorNode n in fn.Nodes) {
                 make_node(tn.Nodes, Path.GetFileName(n.Path.Remove(n.Path.Length - 1)));
-                //tn.Nodes.Add(Path.GetFileName(n.Path.Remove(n.Path.Length-1)));
                 make_tree(n, tn.Nodes[tn.Nodes.Count-1]);
             }
             foreach (FileInfo f in new DirectoryInfo(fn.Path).GetFiles())
@@ -121,7 +119,9 @@ namespace ftag_gui
                 tn.ImageIndex = 0;
             }
         }
+        #endregion
 
+        #region [--- View Tab ---]
         private void tvTags_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (tvTags.SelectedNode != null)
@@ -174,7 +174,7 @@ namespace ftag_gui
 
         private void tvTags_DoubleClick(object sender, EventArgs e)
         {
-            if (tvTags.SelectedNode != null)
+            if (tvTags.SelectedNode != null && tvTags.SelectedNode.Nodes.Count == 0)
             {
                 string path = tvTags.SelectedNode.FullPath.Replace('\\', '/');
                 Process.Start(Path.Combine(tbPath.Text, tvTags.SelectedNode.FullPath));
@@ -213,6 +213,6 @@ namespace ftag_gui
                 index += 1;
             }
         }
-
+        #endregion
     }
 }
