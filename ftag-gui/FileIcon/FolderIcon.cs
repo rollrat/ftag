@@ -1,4 +1,6 @@
-﻿using System;
+﻿// https://stackoverflow.com/questions/1599235/how-do-i-fetch-the-folder-icon-on-windows-7-using-shell32-shgetfileinfo
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
