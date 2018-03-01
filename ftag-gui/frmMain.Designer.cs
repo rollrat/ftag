@@ -463,7 +463,7 @@
             this.lvGroupList.GridLines = true;
             this.lvGroupList.Location = new System.Drawing.Point(763, 33);
             this.lvGroupList.Name = "lvGroupList";
-            this.lvGroupList.Size = new System.Drawing.Size(324, 293);
+            this.lvGroupList.Size = new System.Drawing.Size(324, 295);
             this.lvGroupList.TabIndex = 21;
             this.lvGroupList.UseCompatibleStateImageBehavior = false;
             this.lvGroupList.View = System.Windows.Forms.View.Details;
@@ -593,7 +593,7 @@
             this.lvSearch.GridLines = true;
             this.lvSearch.Location = new System.Drawing.Point(118, 74);
             this.lvSearch.Name = "lvSearch";
-            this.lvSearch.Size = new System.Drawing.Size(822, 252);
+            this.lvSearch.Size = new System.Drawing.Size(822, 254);
             this.lvSearch.TabIndex = 10;
             this.lvSearch.UseCompatibleStateImageBehavior = false;
             this.lvSearch.View = System.Windows.Forms.View.Details;
@@ -682,9 +682,9 @@
             this.columnHeader13});
             this.lvMove.FullRowSelect = true;
             this.lvMove.GridLines = true;
-            this.lvMove.Location = new System.Drawing.Point(132, 20);
+            this.lvMove.Location = new System.Drawing.Point(118, 16);
             this.lvMove.Name = "lvMove";
-            this.lvMove.Size = new System.Drawing.Size(822, 276);
+            this.lvMove.Size = new System.Drawing.Size(822, 283);
             this.lvMove.TabIndex = 11;
             this.lvMove.UseCompatibleStateImageBehavior = false;
             this.lvMove.View = System.Windows.Forms.View.Details;
@@ -706,7 +706,7 @@
             // bMove
             // 
             this.bMove.Enabled = false;
-            this.bMove.Location = new System.Drawing.Point(824, 300);
+            this.bMove.Location = new System.Drawing.Point(810, 305);
             this.bMove.Name = "bMove";
             this.bMove.Size = new System.Drawing.Size(130, 23);
             this.bMove.TabIndex = 1;
@@ -717,7 +717,7 @@
             // tbMove
             // 
             this.tbMove.Enabled = false;
-            this.tbMove.Location = new System.Drawing.Point(132, 300);
+            this.tbMove.Location = new System.Drawing.Point(118, 305);
             this.tbMove.Name = "tbMove";
             this.tbMove.Size = new System.Drawing.Size(686, 23);
             this.tbMove.TabIndex = 0;
