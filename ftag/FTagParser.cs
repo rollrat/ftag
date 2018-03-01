@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ftag
 {
@@ -32,8 +33,9 @@ namespace ftag
             this.dic_object = dic_object;
             this.dic_group = dic_group;
             this.dic_property = dic_property;
-
-            this.source = source;
+            
+            this.source = Regex.Replace(source, @"\t|\n|\r", "");
+            
             p = 0;
             
             tag_property = new Dictionary<string, string>();

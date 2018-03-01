@@ -7,6 +7,7 @@
 ***/
 
 using System.Collections.Generic;
+using System.IO;
 
 namespace ftag
 {
@@ -64,15 +65,18 @@ namespace ftag
 
             return result;
         }
-
+        
         /// <summary>
-        /// Gets whether intersection is in the group.
-        /// This function may return true your version. 
+        /// Return non-exists file list.
         /// </summary>
         /// <returns></returns>
-        public bool VerifyGroup()
+        public List<FTagObject> VerifyObject()
         {
-            return true;
+            List<FTagObject> result = new List<FTagObject>();
+            foreach (FTagObject obj in dic_object.Values)
+                if (!File.Exists(path + obj.SubPath))
+                    result.Add(obj);
+            return result;
         }
 
     }

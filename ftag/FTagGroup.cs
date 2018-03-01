@@ -6,7 +6,6 @@
 
 ***/
 
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,8 +21,8 @@ namespace ftag
         {
             group_name = name;
             this.descript = descript;
-            this.tags = new List<string>(tags.Split(new string[] { "," },
-                StringSplitOptions.None));
+            this.tags = FTagTool.GetTagList(tags);
+            this.tags.Sort();
         }
 
         public FTagGroup(string name, List<string> tags)

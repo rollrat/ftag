@@ -129,8 +129,26 @@ namespace ftag
         #endregion
 
         #region [--- Stream Block Save ---]
+        private void sort()
+        {
+            Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
+            var list = this.dic.Keys.ToList();
+            list.Sort();
+            foreach (var key in list) {
+                dic.Add(key, this.dic[key]);
+            }
+            this.dic = dic;
+            Dictionary<string, FTagGroup> group = new Dictionary<string, FTagGroup>();
+            list = this.group.Keys.ToList();
+            list.Sort();
+            foreach (var key in list) {
+                group.Add(key, this.group[key]);
+            }
+            this.group = group;
+        }
         public void Save(bool withFormat = false)
         {
+            sort();
             StringBuilder builder = new StringBuilder();
             builder.Append("{"); // FTag
 
@@ -169,5 +187,29 @@ namespace ftag
         {
             return new FTagVerifier(folder_path, dic, group);
         }
+
+        #region [--- Methods ---]
+
+        public bool RenameTag(string oldTag, string newTag)
+        {
+            if (GetTagList().Contains(newTag)) return false;
+            FTagTool.RenameTag(oldTag, newTag, ref dic, ref group);
+            return true;
+        }
+
+        public void DeleteTag(string tag)
+        {
+            FTagTool.DeleteTag(tag, ref dic, ref group);
+        }
+
+        public List<FTagObject> SearchTag(
+            List<string> andTags,
+            List<string> orTags,
+            List<string> notTags)
+        {
+            return FTagTool.SearchTag(andTags, orTags, notTags, dic);
+        }
+
+        #endregion
     }
 }

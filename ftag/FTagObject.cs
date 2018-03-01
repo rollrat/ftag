@@ -22,8 +22,7 @@ namespace ftag
         {
             this.subpath = subpath;
             this.descript = descript;
-            tags = new List<string> (ptags.Split(new string[] {","}, 
-                StringSplitOptions.None));
+            tags = FTagTool.GetTagList(ptags);
             tags.Sort();
         }
         public FTagObject(string subpath, List<string> ptags)
@@ -40,7 +39,7 @@ namespace ftag
         { get { return descript; } set { descript = value; } }
 
         public List<string> Tags
-        { get { return tags; } set { tags = new List<string>(value); } }
+        { get { return tags; } set { tags = new List<string>(value); tags.Sort(); } }
 
         public bool Exist(string tag)
         { return tags.BinarySearch(tag) > 0; }

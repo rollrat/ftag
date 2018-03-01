@@ -150,8 +150,7 @@ namespace ftag_gui
         private void tbTags_TextChanged(object sender, EventArgs e)
         {
             lvTags.Items.Clear();
-            foreach (string str in tbTags.Text.Split(new string[] { "," },
-                StringSplitOptions.None))
+            foreach (string str in FTagTool.GetTagList(tbTags.Text))
             {
                 lvTags.Items.Add(new ListViewItem(str.Trim()));
             }
@@ -301,6 +300,7 @@ namespace ftag_gui
         #endregion
 
         #region [--- Manage ---]
+
         private void UpdateManage()
         {
             UpdateGroup();
@@ -338,7 +338,7 @@ namespace ftag_gui
         private void bGrouping_Click(object sender, EventArgs e)
         {
             if (tbGroupName.Text == "") return;
-            if (tbStagingTags.Text == "") return;
+            // if (tbStagingTags.Text == "") return;
             if (stream.ExistGroup(tbGroupName.Text) && !tbGroupName.ReadOnly)
             {
                 MessageBox.Show("Already exist group name!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -420,8 +420,11 @@ namespace ftag_gui
 
                 if (stream.ExistGroup(lvGroupList.SelectedItems[0].Text))
                 {
-                    foreach (string tag in stream.GetGroup(lvGroupList.SelectedItems[0].Text).Tags)
+                    foreach (string tag in stream.GetGroup(lvGroupList.SelectedItems[0].Text).Tags) { 
                         lbStagingTags.Items.Add(tag);
+                        lbGroupPossible.Items.Remove(tag);
+                    }
+                    
                     tbGroupName.Text = lvGroupList.SelectedItems[0].Text;
                     tbGroupName.ReadOnly = true;
                     UpdateStaging();
@@ -431,6 +434,7 @@ namespace ftag_gui
         #endregion
 
         #region [--- Folder Merge ---]
+
         #endregion
 
         #endregion
