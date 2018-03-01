@@ -16,6 +16,8 @@ namespace ftag
 {
     public class FTagTool
     {
+        public static object MessageBox { get; private set; }
+
         /// <summary>
         /// Get tag list from tags string.
         /// </summary>
@@ -197,12 +199,21 @@ namespace ftag
                 string newsubpath = (subpath + Path.GetFileName(source[i].SubPath)).Replace('\\', '/');
                 if (oldPath == newPath) continue;
                 new FileInfo(newPath).Directory.Create();
-                File.Move(oldPath, newPath);
-                FTagObject tmp = dic[oldsubpath];
-                tmp.SubPath = newsubpath;
-                dic.Remove(oldsubpath);
-                if (i == 163) break;
-                dic.Add(newsubpath, tmp);
+                try
+                {
+                    File.Move(oldPath, newPath);
+                    FTagObject tmp = dic[oldsubpath];
+                    tmp.SubPath = newsubpath;
+                    dic.Remove(oldsubpath);
+                    dic.Add(newsubpath, tmp);
+                }
+                catch
+                {
+                    // If source and also target have same object,
+                    // then move function throw by already exist.
+                    // This path can not be filtered by compare path. [old == new]
+                    // So, skip this step.
+                }
             }
         }
         

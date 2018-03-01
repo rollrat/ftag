@@ -130,6 +130,7 @@
             this.tbPath.ReadOnly = true;
             this.tbPath.Size = new System.Drawing.Size(1144, 23);
             this.tbPath.TabIndex = 12;
+            this.tbPath.Text = "F:\\Game\\Skyrim\\Mods\\Pakage\\Pack1\\Tmp";
             // 
             // tvTags
             // 
