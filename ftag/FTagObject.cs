@@ -33,7 +33,7 @@ namespace ftag
         }
 
         public string SubPath
-        { get { return subpath; } }
+        { get { return subpath; } set { subpath = value; } }
 
         public string Descript
         { get { return descript; } set { descript = value; } }

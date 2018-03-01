@@ -49,6 +49,7 @@ namespace ftag_gui
 
         private void frmMain_Load(object sender, System.EventArgs e)
         {
+            cbSearch.Text = "And";
         }
 
         #region [--- Folder Open ---]
@@ -68,6 +69,12 @@ namespace ftag_gui
 
             stream = new FTagStream(tbPath.Text);
 
+            UpdateTreeview();
+        }
+
+        private void UpdateTreeview()
+        {
+            tvTags.Nodes.Clear();
             callback b = new callback(cb);
             IAsyncResult ar = b.BeginInvoke(tbPath.Text, new AsyncCallback(async_end), null);
         }
@@ -91,6 +98,7 @@ namespace ftag_gui
                 color_node(tvTags.Nodes);
                 UpdateTagsRank();
                 UpdateManage();
+                EnableControl();
             });
         }
         private void make_tree(FileIndexorNode fn, TreeNode tn)
@@ -124,6 +132,17 @@ namespace ftag_gui
             } else {
                 tn.ImageIndex = 0;
             }
+        }
+
+        private void EnableControl()
+        {
+            Control[] control = {
+                bGrouping, tbGroupName,
+                tbSearch, bSearch,
+                tbMove, bMove
+            };
+            foreach (Control obj in control)
+                obj.Enabled = true;
         }
         #endregion
 
@@ -437,6 +456,112 @@ namespace ftag_gui
 
         #endregion
 
+        #region [--- Search ---]
+        private void UpdateSearch()
+        {
+            List<string> andTags = new List<string>();
+            List<string> orTags = new List<string>();
+            List<string> notTags = new List<string>();
+            
+            List<string> tags = stream.GetTagList();
+
+            List<string> nonnot = new List<string>();
+            List<string> not = new List<string>();
+            foreach (string str in tbSearch.Text.Split(' '))
+                if (str != "")
+                    if (str[0] == '-')
+                        not.Add(str.Substring(1));
+                    else
+                        nonnot.Add(str);
+
+            foreach (string tag in nonnot)
+                if (tags.Contains(tag))
+                    if (cbSearch.Text == "And")
+                        andTags.Add(tag);
+                    else if (cbSearch.Text == "Or")
+                        orTags.Add(tag);
+
+            foreach (string tag in not)
+                if (tags.Contains(tag))
+                    notTags.Add(tag);
+            
+            int count = 1;
+            List<ListViewItem> lvil = new List<ListViewItem>();
+            List<ListViewItem> lvil2 = new List<ListViewItem>();
+            foreach (FTagObject obj in stream.SearchTag(andTags, orTags, notTags)) {
+                StringBuilder builder = new StringBuilder();
+                for (int j = 0; j < obj.Tags.Count; j++) {
+                    builder.Append(obj.Tags[j]);
+                    if (j != obj.Tags.Count - 1)
+                        builder.Append(", ");
+                }
+                lvil.Add(new ListViewItem(new string[] {
+                        count.ToString(),
+                        obj.SubPath,
+                        builder.ToString()
+                    }));
+                lvil2.Add(new ListViewItem(new string[] {
+                        count.ToString(),
+                        obj.SubPath,
+                        builder.ToString()
+                    }));
+                count++;
+            }
+            lvSearch.Items.Clear();
+            lvSearch.Items.AddRange(lvil.ToArray());
+            lvMove.Items.Clear();
+            lvMove.Items.AddRange(lvil2.ToArray());
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                bSearch.PerformClick();
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSearch();
+        }
+
+        private void bSearch_Click(object sender, EventArgs e)
+        {
+            UpdateSearch();
+        }
+
+        private void lvSearch_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvSearch.SelectedItems != null)
+            {
+                TagsViewFromSubPath(lvSearch.SelectedItems[0].SubItems[1].Text);
+            }
+        }
         #endregion
+
+        #region [--- Move ---]
+        private void bMove_Click(object sender, EventArgs e)
+        {
+            List<FTagObject> src = stream.GetObjectList();
+            List<FTagObject> objs = new List<FTagObject>();
+            foreach (ListViewItem lvi in lvSearch.Items)
+            {
+                foreach (FTagObject obj in src)
+                    if (obj.SubPath == lvi.SubItems[1].Text)
+                    {
+                        objs.Add(obj);
+                        break;
+                    }
+            }
+            if (!stream.GetVerifier().VerifyMove(objs, tbMove.Text))
+            {
+                MessageBox.Show("Verify error! Please check target directory!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            stream.Move(objs, tbMove.Text);
+            UpdateTreeview();
+        }
+        #endregion
+
+        #endregion
+
     }
 }

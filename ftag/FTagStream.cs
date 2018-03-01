@@ -62,7 +62,7 @@ namespace ftag
                     dic[key].Tags = value;
                 if (value.Count == 0)
                     dic.Remove(key);
-                Save();
+                save();
             }
         }
 
@@ -100,7 +100,7 @@ namespace ftag
                 group[name].Tags = tags;
             if (tags.Count == 0)
                 group.Remove(name);
-            Save();
+            save();
         }
 
         public FTagGroup GetGroup(string name)
@@ -146,14 +146,13 @@ namespace ftag
             }
             this.group = group;
         }
-        public void Save(bool withFormat = false)
+        private void save(bool withFormat = false)
         {
             sort();
             StringBuilder builder = new StringBuilder();
-            builder.Append("{"); // FTag
+            builder.Append("{");
 
             if (group.Count > 0) {
-                // Add group.
                 builder.Append("\"group\":{");
                 for (int i = 0; i < group.Count; i++)
                 {
@@ -161,12 +160,10 @@ namespace ftag
 
                     builder.Append(group.ToString());
                     if (i != dic.Count - 1) builder.Append(',');
-                    if (withFormat) builder.Append(Environment.NewLine);
                 }
                 builder.Append("},");
             }
-
-            // Add tag-property.
+            
             builder.Append("\"tags\":{");
             for (int i = 0; i < dic.Count; i++)
             {
@@ -174,22 +171,22 @@ namespace ftag
 
                 builder.Append(obj.ToString());
                 if (i != dic.Count - 1) builder.Append(',');
-                if (withFormat) builder.Append(Environment.NewLine);
             }
             builder.Append("}");
 
-            builder.Append("}"); // FTag
+            builder.Append("}");
             File.WriteAllText(path, builder.ToString());
         }
         #endregion
 
+        #region [--- Verifier ---]
         public FTagVerifier GetVerifier()
         {
             return new FTagVerifier(folder_path, dic, group);
         }
+        #endregion
 
         #region [--- Methods ---]
-
         public bool RenameTag(string oldTag, string newTag)
         {
             if (GetTagList().Contains(newTag)) return false;
@@ -210,6 +207,16 @@ namespace ftag
             return FTagTool.SearchTag(andTags, orTags, notTags, dic);
         }
 
+        public List<Tuple<string,int>> GetTagRank()
+        {
+            return FTagTool.GetTagRank(dic);
+        }
+
+        public void Move(List<FTagObject> source, string subpath)
+        {
+            FTagTool.Move(ref dic, source, folder_path, subpath);
+            save();
+        }
         #endregion
     }
 }

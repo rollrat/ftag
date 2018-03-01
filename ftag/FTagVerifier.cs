@@ -8,6 +8,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ftag
 {
@@ -78,6 +79,54 @@ namespace ftag
                     result.Add(obj);
             return result;
         }
+        
+        /// <summary>
+        /// Test (source/.ftag += target/.ftag).
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public bool VerifyMerge(FTagVerifier target)
+        {
+            if (path.Length > target.path.Length) return false;
+            if (!target.path.StartsWith(path)) return false;
+            string additional_path = target.path.Substring(path.Length);
 
+            // Verify Groups
+            foreach (var pair in target.dic_group)
+                if (dic_group.ContainsKey(pair.Key))
+                    if (dic_group[pair.Key].Tags.SequenceEqual(
+                        target.dic_group[pair.Key].Tags))
+                        return false;
+
+            // Verify objects
+            foreach (var pair in target.dic_object)
+                if (dic_object.ContainsKey(pair.Key))
+                    if (dic_object[pair.Key].Tags.SequenceEqual(
+                        target.dic_object[pair.Key].Tags))
+                        return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Is move ok?
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public bool VerifyMove(List<FTagObject> source, string target)
+        {
+            if (!target.EndsWith("\\")) target += "\\";
+            List<string> filename = new List<string>();
+            foreach (FTagObject obj in source) {
+                if (filename.Contains(Path.GetFileName(obj.SubPath)))
+                    return false;
+                filename.Add(Path.GetFileName(obj.SubPath));
+                if (target + Path.GetFileName(obj.SubPath) == obj.SubPath)
+                if (File.Exists(path + target + Path.GetFileName(obj.SubPath)))
+                    return false;
+            }
+            return true;
+        }
     }
 }

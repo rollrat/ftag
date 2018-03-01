@@ -8,7 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ftag
 {
@@ -25,11 +27,14 @@ namespace ftag
             string[] split = tags.Split(new string[] { "," },
                 StringSplitOptions.None);
 
+            Regex pattern = new Regex(@"[\<\>\!\=\[\]\(\)\{\}\;\:\-\+\^\&\*\%\$\#\@\!\~\`\'\""\/\?\,\.\\]");
+
             foreach (string tag in split) {
                 string put = tag.Trim().Replace(' ', '_');
+                put = pattern.Replace(put, "");
                 if (put == "") continue;
                 if (!result.Contains(put))
-                    result.Add(tag.Trim().Replace(' ', '_'));
+                    result.Add(put);
             }
 
             return result;
@@ -141,5 +146,65 @@ namespace ftag
 
             return result;
         }
+
+        /// <summary>
+        /// Get tags ranking list.
+        /// </summary>
+        /// <param name="dic_object"></param>
+        /// <returns></returns>
+        static public List<Tuple<string,int>> GetTagRank(
+            Dictionary<string, FTagObject> dic_object)
+        {
+            Dictionary<string, int> rank = new Dictionary<string, int>();
+            foreach (var tag in dic_object)
+            {
+                foreach (string key in tag.Value.Tags)
+                {
+                    if (!rank.ContainsKey(key))
+                        rank.Add(key, 1);
+                    else
+                        rank[key] += 1;
+                }
+            }
+
+            var list = rank.ToList();
+            list.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
+            
+            List<Tuple<string,int>> result = new List<Tuple<string,int>>();
+            foreach (var pair in list)
+                result.Add(new Tuple<string, int>(pair.Key, pair.Value));
+            return result;
+        }
+
+        /// <summary>
+        /// Move tags and file.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        static public void Move(
+            ref Dictionary<string, FTagObject> dic,
+            List<FTagObject> source,
+            string path, 
+            string subpath)
+        {
+            if (!subpath.EndsWith("\\")) subpath += "\\";
+            subpath = subpath.Replace('/', '\\');
+            for (int i = 0; i < source.Count; i++)
+            {
+                string oldPath = path + source[i].SubPath;
+                string oldsubpath = source[i].SubPath;
+                string newPath = path + subpath + Path.GetFileName(source[i].SubPath);
+                string newsubpath = (subpath + Path.GetFileName(source[i].SubPath)).Replace('\\', '/');
+                if (oldPath == newPath) continue;
+                new FileInfo(newPath).Directory.Create();
+                File.Move(oldPath, newPath);
+                FTagObject tmp = dic[oldsubpath];
+                tmp.SubPath = newsubpath;
+                dic.Remove(oldsubpath);
+                if (i == 163) break;
+                dic.Add(newsubpath, tmp);
+            }
+        }
+        
     }
 }

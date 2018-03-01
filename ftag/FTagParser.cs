@@ -43,6 +43,9 @@ namespace ftag
             parseFTag();
         }
 
+        #region [--- Parser ---]
+
+        #region [--- Parse Header ---]
         private char get()
         {
             prev_c = source[p];
@@ -130,6 +133,7 @@ namespace ftag
                 tag_property.Add(property, contents);
             }
         }
+        #endregion
 
         #region [--- Parse Tag ---]
         private void parseTags()
@@ -183,6 +187,8 @@ namespace ftag
                 tag_property.Clear();
             }
         }
+        #endregion
+
         #endregion
     }
 }
