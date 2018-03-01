@@ -192,6 +192,7 @@ namespace ftag_gui
 
         private void UpdateTagsRank()
         {
+            lvRank.Items.Clear();
             Dictionary<string, int> rank = new Dictionary<string, int>();
             foreach (var tag in stream.GetTagList())
             {

@@ -69,7 +69,7 @@
             this.bFolder.Location = new System.Drawing.Point(1108, 13);
             this.bFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bFolder.Name = "bFolder";
-            this.bFolder.Size = new System.Drawing.Size(110, 23);
+            this.bFolder.Size = new System.Drawing.Size(110, 24);
             this.bFolder.TabIndex = 13;
             this.bFolder.Text = "Folder";
             this.bFolder.UseVisualStyleBackColor = true;
@@ -94,7 +94,7 @@
             this.tvTags.ContextMenuStrip = this.contextMenuStrip1;
             this.tvTags.Location = new System.Drawing.Point(12, 45);
             this.tvTags.Name = "tvTags";
-            this.tvTags.Size = new System.Drawing.Size(352, 303);
+            this.tvTags.Size = new System.Drawing.Size(352, 406);
             this.tvTags.TabIndex = 14;
             this.tvTags.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTags_AfterSelect);
             this.tvTags.DoubleClick += new System.EventHandler(this.tvTags_DoubleClick);
@@ -119,7 +119,7 @@
             this.bOpen.Location = new System.Drawing.Point(1224, 13);
             this.bOpen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bOpen.Name = "bOpen";
-            this.bOpen.Size = new System.Drawing.Size(110, 23);
+            this.bOpen.Size = new System.Drawing.Size(110, 24);
             this.bOpen.TabIndex = 15;
             this.bOpen.Text = "Open";
             this.bOpen.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             this.tabControl1.Location = new System.Drawing.Point(370, 45);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(964, 303);
+            this.tabControl1.Size = new System.Drawing.Size(964, 406);
             this.tabControl1.TabIndex = 16;
             // 
             // tabPage1
@@ -153,7 +153,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(956, 275);
+            this.tabPage1.Size = new System.Drawing.Size(956, 378);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -170,7 +170,7 @@
             this.lvRank.GridLines = true;
             this.lvRank.Location = new System.Drawing.Point(233, 93);
             this.lvRank.Name = "lvRank";
-            this.lvRank.Size = new System.Drawing.Size(241, 176);
+            this.lvRank.Size = new System.Drawing.Size(241, 279);
             this.lvRank.TabIndex = 9;
             this.lvRank.UseCompatibleStateImageBehavior = false;
             this.lvRank.View = System.Windows.Forms.View.Details;
@@ -197,9 +197,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lvTags.Location = new System.Drawing.Point(82, 75);
             this.lvTags.Name = "lvTags";
-            this.lvTags.Size = new System.Drawing.Size(145, 194);
+            this.lvTags.Size = new System.Drawing.Size(145, 297);
             this.lvTags.TabIndex = 8;
             this.lvTags.UseCompatibleStateImageBehavior = false;
+            this.lvTags.View = System.Windows.Forms.View.Tile;
             // 
             // label6
             // 
@@ -274,20 +275,20 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(956, 275);
+            this.tabPage2.Size = new System.Drawing.Size(956, 378);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Search";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
-            this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(956, 275);
+            this.tabPage3.Size = new System.Drawing.Size(956, 378);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Info";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -296,7 +297,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("맑은 고딕", 11.25F);
-            this.label2.Location = new System.Drawing.Point(184, 287);
+            this.label2.Location = new System.Drawing.Point(216, 274);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(316, 20);
             this.label2.TabIndex = 2;
@@ -306,7 +307,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("맑은 고딕", 11.25F);
-            this.label1.Location = new System.Drawing.Point(184, 247);
+            this.label1.Location = new System.Drawing.Point(216, 234);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(278, 20);
             this.label1.TabIndex = 1;
@@ -314,19 +315,19 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(188, 80);
+            this.pictureBox1.Image = global::ftag_gui.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(220, 61);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(404, 144);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1346, 360);
+            this.ClientSize = new System.Drawing.Size(1346, 463);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.bOpen);
             this.Controls.Add(this.tvTags);
@@ -363,7 +364,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbFullPath;
@@ -380,6 +380,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

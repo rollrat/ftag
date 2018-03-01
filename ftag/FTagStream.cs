@@ -17,7 +17,8 @@ namespace ftag
     public class FTagStream
     {
         Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
-
+        Dictionary<string, FTagGroup> group = new Dictionary<string, FTagGroup>();
+        
         string source;
         string path;
 
@@ -37,33 +38,8 @@ namespace ftag
 
         private void parseFTag()
         {
-            for (int i = 0; i < source.Length; i++)
-            {
-                StringBuilder subpath = new StringBuilder();
-                StringBuilder tags = new StringBuilder();
-
-                while (source[i++] != '{' && i < source.Length);
-                if (i == source.Length) return;
-                
-                while (Char.IsWhiteSpace(source[i])) i++;
-                if (source[i] == '\"')
-                {
-                    while (source[++i] != '\"')
-                        subpath.Append(source[i]);
-                }
-                while (Char.IsWhiteSpace(source[++i])) ;
-                if (source[i] == ':')
-                {
-                    while (Char.IsWhiteSpace(source[++i])) ;
-                    while (source[++i] != '\"')
-                        tags.Append(source[i]);
-                }
-
-                while (source[++i] != '}') ;
-                
-                dic.Add(subpath.ToString(),
-                    new FTagObject(subpath.ToString(), tags.ToString()));
-            }
+            Dictionary<string, string> ftag_property = new Dictionary<string, string>();
+            new FTagParser(source, ref dic, ref ftag_property);
         }
 
         public List<string> this[string key]
@@ -94,35 +70,26 @@ namespace ftag
             return dic.ContainsKey(key);
         }
 
-        public void Save()
+        public void Save(bool withFormat = false)
         {
             StringBuilder builder = new StringBuilder();
+            builder.Append("{"); // FTag
 
+            // Add property.
+
+            // Add tag-property.
+            builder.Append("{");
             for (int i = 0; i < dic.Count; i++)
             {
-                string subpath = dic.ElementAt(i).Key;
                 FTagObject obj = dic.ElementAt(i).Value;
 
                 builder.Append(obj.ToString());
                 if (i != dic.Count - 1) builder.Append(',');
+                if (withFormat) builder.Append(Environment.NewLine);
             }
+            builder.Append("}");
 
-            File.WriteAllText(path, builder.ToString());
-        }
-
-        public void SaveFormat()
-        {
-            StringBuilder builder = new StringBuilder();
-
-            for (int i = 0; i < dic.Count; i++)
-            {
-                string subpath = dic.ElementAt(i).Key;
-                FTagObject obj = dic.ElementAt(i).Value;
-
-                builder.Append(obj.ToStringFormat());
-                if (i != dic.Count - 1) builder.Append("," + Environment.NewLine);
-            }
-
+            builder.Append("}"); // FTag
             File.WriteAllText(path, builder.ToString());
         }
     }
