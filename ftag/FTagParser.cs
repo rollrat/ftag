@@ -92,15 +92,18 @@ namespace ftag
             {
                 string property = getString();
                 if (get() != ':') throw new Exception("Contents not found. [" + property + "]");
-                string contents = getString();
-                dic_property.Add(property, contents);
-            }
-            else if (prev() == '{')
-            {
-                parseTags();
-                while (get() == ',')
+                if (property == "tags" && get() == '{')
+                {
                     parseTags();
-                if (prev() != '}') throw new Exception("Tags parse error.");
+                    while (get() == ',')
+                        parseTags();
+                    if (prev() != '}') throw new Exception("Tags parse error.");
+                }
+                else // ftag option
+                {
+                    string contents = getString();
+                    dic_property.Add(property, contents);
+                }
             }
         }
 

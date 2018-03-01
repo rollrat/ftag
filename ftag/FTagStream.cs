@@ -14,6 +14,7 @@ using System.Text;
 
 namespace ftag
 {
+    // In the early days, it was implemented as a file-stream.
     public class FTagStream
     {
         Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
@@ -78,7 +79,7 @@ namespace ftag
             // Add property.
 
             // Add tag-property.
-            builder.Append("{");
+            builder.Append("\"tags\":{");
             for (int i = 0; i < dic.Count; i++)
             {
                 FTagObject obj = dic.ElementAt(i).Value;

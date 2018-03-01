@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ftag_gui
@@ -61,6 +62,10 @@ namespace ftag_gui
 
         private void bOpen_Click(object sender, EventArgs e)
         {
+            bFolder.Enabled = false;
+            bOpen.Enabled = false;
+            bSave.Enabled = true;
+
             stream = new FTagStream(tbPath.Text);
 
             callback b = new callback(cb);
@@ -136,6 +141,7 @@ namespace ftag_gui
                         if (i != tags.Count - 1)
                             tbTags.AppendText(", ");
                     }
+                    UpdateRelation(tags);
                 }
             }
         }
@@ -152,6 +158,7 @@ namespace ftag_gui
 
         private void bSave_Click(object sender, EventArgs e)
         {
+            if (tbFullPath.Text == "") return;
             List<string> tags = new List<String>();
             foreach (ListViewItem str in lvTags.Items)
             {
@@ -186,7 +193,16 @@ namespace ftag_gui
             if (tvTags.SelectedNode != null)
             {
                 string path = tvTags.SelectedNode.FullPath.Replace('\\', '/');
-                Process.Start( Path.Combine(tbPath.Text, tvTags.SelectedNode.FullPath));
+                Process.Start(Path.Combine(tbPath.Text, tvTags.SelectedNode.FullPath));
+            }
+        }
+
+        private void 상위폴더열기PToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tvTags.SelectedNode != null)
+            {
+                string path = tvTags.SelectedNode.FullPath.Replace('\\', '/');
+                Process.Start(Directory.GetParent(Path.Combine(tbPath.Text, tvTags.SelectedNode.FullPath)).FullName);
             }
         }
 
@@ -214,6 +230,73 @@ namespace ftag_gui
                 index += 1;
             }
         }
+
+        private void lvRank_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvRank.SelectedItems != null)
+            {
+                List<string> tags = new List<string>();
+                foreach (ListViewItem item in lvRank.SelectedItems)
+                    tags.Add(item.SubItems[1].Text);
+                UpdateRelation(tags, true);
+            }
+        }
+
+        List<FTagObject> relation_tag = new List<FTagObject>();
+        bool select_stay = false;
+        private void UpdateRelation(List<string> tags, bool subset = false)
+        {
+            if (select_stay) { select_stay = false; return; }
+            lvRelation.Items.Clear();
+            relation_tag.Clear();
+            List<ListViewItem> lvil = new List<ListViewItem>();
+            List<FTagObject> tag_list = stream.GetTagList();
+            for (int i = tag_list.Count-1; i >= 0; i--)
+            {
+                if ((subset == false && tag_list[i].Intersection(tags)) ||
+                    (subset == true && tag_list[i].Subset(tags)))
+                {
+                    relation_tag.Add(tag_list[i]);
+                    StringBuilder builder = new StringBuilder();
+                    for (int j = 0; j < tag_list[i].Tags.Count; j++) {
+                        builder.Append(tag_list[i].Tags[j]);
+                        if (j != tag_list[i].Tags.Count - 1)
+                            builder.Append(", ");
+                    }
+                    lvil.Add(new ListViewItem(new string[] {
+                        Path.GetFileName(tag_list[i].SubPath),
+                        builder.ToString()
+                    }));
+                }
+            }
+            lvRelation.Items.AddRange(lvil.ToArray());
+        }
+
+        private void lvRelation_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvRelation.SelectedItems != null)
+            {
+                TagsViewFromSubPath(relation_tag[lvRelation.Items
+                    .IndexOf(lvRelation.SelectedItems[0])].SubPath);
+            }
+        }
+
+        private void TagsViewFromSubPath(string subpath)
+        {
+            string[] path = subpath.Split('/');
+            TreeNode node = null;
+            foreach (TreeNode tn in tvTags.Nodes)
+                if (path[0] == tn.Text)
+                    node = tn;
+            for (int i = 1; i < path.Length; i++)
+                foreach (TreeNode tn in node.Nodes)
+                    if (path[i] == tn.Text)
+                        node = tn;
+            tvTags.Focus();
+            select_stay = true;
+            tvTags.SelectedNode = node;
+        }
         #endregion
+       
     }
 }

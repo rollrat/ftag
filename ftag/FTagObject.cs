@@ -45,6 +45,24 @@ namespace ftag
         public bool Exist(string tag)
         { return tags.BinarySearch(tag) > 0; }
 
+        public bool Intersection(List<string> tags)
+        {
+            foreach (string tag in this.tags)
+            {
+                if (tags.Contains(tag)) return true;
+            }
+            return false;
+        }
+
+        public bool Subset(List<string> tags)
+        {
+            foreach (string tag in tags)
+            {
+                if (!this.tags.Contains(tag)) return false;
+            }
+            return true;
+        }
+
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
