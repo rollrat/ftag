@@ -40,7 +40,7 @@ namespace ftag
         private void parseFTag()
         {
             Dictionary<string, string> ftag_property = new Dictionary<string, string>();
-            new FTagParser(source, ref dic, ref ftag_property);
+            new FTagParser(source, ref dic, ref group, ref ftag_property);
         }
 
         public List<string> this[string key]
@@ -57,7 +57,12 @@ namespace ftag
             }
         }
 
-        public List<FTagObject> GetTagList()
+        public bool Contains(string key)
+        {
+            return dic.ContainsKey(key);
+        }
+
+        public List<FTagObject> GetObjectList()
         {
             List<FTagObject> tags = new List<FTagObject>();
             foreach (var pair in dic) {
@@ -66,9 +71,47 @@ namespace ftag
             return tags;
         }
 
-        public bool Contains(string key)
+        public List<FTagGroup> GetGroupList()
         {
-            return dic.ContainsKey(key);
+            List<FTagGroup> group = new List<FTagGroup>();
+            foreach (var pair in this.group)
+            {
+                group.Add(pair.Value);
+            }
+            return group;
+        }
+
+        public void SetGroup(string name, List<string> tags)
+        {
+            if (!group.ContainsKey(name))
+                group.Add(name, new FTagGroup(name, tags));
+            else
+                group[name].Tags = tags;
+            if (tags.Count == 0)
+                group.Remove(name);
+            Save();
+        }
+
+        public FTagGroup GetGroup(string name)
+        {
+            return group[name];
+        }
+
+        public bool ExistGroup(string name)
+        {
+            return group.ContainsKey(name);
+        }
+        
+        public List<string> GetTagList()
+        {
+            List<string> tags = new List<string>();
+            foreach (var pair in dic)
+            {
+                foreach (var tag in pair.Value.Tags)
+                    if (!tags.Contains(tag))
+                        tags.Add(tag);
+            }
+            return tags;
         }
 
         public void Save(bool withFormat = false)
@@ -76,7 +119,19 @@ namespace ftag
             StringBuilder builder = new StringBuilder();
             builder.Append("{"); // FTag
 
-            // Add property.
+            if (group.Count > 0) {
+                // Add group.
+                builder.Append("\"group\":{");
+                for (int i = 0; i < group.Count; i++)
+                {
+                    FTagGroup group = this.group.ElementAt(i).Value;
+
+                    builder.Append(group.ToString());
+                    if (i != dic.Count - 1) builder.Append(',');
+                    if (withFormat) builder.Append(Environment.NewLine);
+                }
+                builder.Append("},");
+            }
 
             // Add tag-property.
             builder.Append("\"tags\":{");

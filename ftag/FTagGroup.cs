@@ -15,11 +15,13 @@ namespace ftag
     public class FTagGroup
     {
         string group_name;
+        string descript;
         List<string> tags;
 
-        public FTagGroup(string name, string tags)
+        public FTagGroup(string name, string tags, string descript = "")
         {
             group_name = name;
+            this.descript = descript;
             this.tags = new List<string>(tags.Split(new string[] { "," },
                 StringSplitOptions.None));
         }
@@ -29,6 +31,9 @@ namespace ftag
             group_name = name;
             this.tags = tags;
         }
+
+        public string Descript
+        { get { return descript; } set { descript = value; } }
 
         public List<string> Tags
         { get { return tags; } set { tags = new List<string>(value); } }
@@ -48,6 +53,9 @@ namespace ftag
                 if (i != tags.Count - 1)
                     builder.Append(",");
             }
+            builder.Append("\"");
+            if (descript != "")
+                builder.Append(",\"descript\":\"" + descript + "\"");
             builder.Append("}");
             return builder.ToString();
         }

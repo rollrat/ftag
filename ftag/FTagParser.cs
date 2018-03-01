@@ -15,6 +15,7 @@ namespace ftag
     public class FTagParser
     {
         Dictionary<string, FTagObject> dic_object;
+        Dictionary<string, FTagGroup> dic_group;
         Dictionary<string, string> dic_property;
         
         Dictionary<string, string> tag_property;
@@ -25,9 +26,11 @@ namespace ftag
 
         public FTagParser(string source, 
             ref Dictionary<string, FTagObject> dic_object,
+            ref Dictionary<string, FTagGroup> dic_group,
             ref Dictionary<string, string> dic_property)
         {
             this.dic_object = dic_object;
+            this.dic_group = dic_group;
             this.dic_property = dic_property;
 
             this.source = source;
@@ -92,14 +95,21 @@ namespace ftag
             {
                 string property = getString();
                 if (get() != ':') throw new Exception("Contents not found. [" + property + "]");
-                if (property == "tags" && get() == '{')
+                if (property == "tags")
                 {
+                    if (get() != '{') throw new Exception("Tags parse error.");
                     parseTags();
-                    while (get() == ',')
-                        parseTags();
+                    while (get() == ',') parseTags();
                     if (prev() != '}') throw new Exception("Tags parse error.");
                 }
-                else // ftag option
+                else if (property == "group")
+                {
+                    if (get() != '{') throw new Exception("Tags parse error.");
+                    parseGroup();
+                    while (get() == ',') parseGroup();
+                    if (prev() != '}') throw new Exception("Tags parse error.");
+                }
+                else
                 {
                     string contents = getString();
                     dic_property.Add(property, contents);
@@ -107,9 +117,23 @@ namespace ftag
             }
         }
 
+        private void parseTagProperty()
+        {
+            if (get() == '"')
+            {
+                string property = getString();
+                if (get() != ':') throw new Exception("Contents not found. [" + property + "]");
+                if (get() != '"') throw new Exception("Tags parse error.");
+                string contents = getString();
+                tag_property.Add(property, contents);
+            }
+        }
+
+        #region [--- Parse Tag ---]
         private void parseTags()
         {
-            if (get() != '{') throw new Exception("Tags parse error.");
+            if (now() != '{') { return; }
+            get();
             parseTagProperty();
             while (get() == ',')
                 parseTagProperty();
@@ -130,17 +154,33 @@ namespace ftag
                 tag_property.Clear();
             }
         }
+        #endregion
 
-        private void parseTagProperty()
+        #region [--- Parse Group ---]
+        private void parseGroup()
         {
-            if (get() == '"')
+            if (now() != '{') { return; }
+            get();
+            parseTagProperty();
+            while (get() == ',')
+                parseTagProperty();
+            if (prev() != '}') throw new Exception("Tags parse error.");
+
+            if (tag_property.Count != 0)
             {
-                string property = getString();
-                if (get() != ':') throw new Exception("Contents not found. [" + property + "]");
-                if (get() != '"') throw new Exception("Tags parse error.");
-                string contents = getString();
-                tag_property.Add(property, contents);
+                if (!tag_property.ContainsKey("groupname"))
+                    throw new Exception("Tags parse error.");
+                string subpath = tag_property["groupname"];
+                string tags = "";
+                string descript = "";
+                if (tag_property.ContainsKey("tags"))
+                    tags = tag_property["tags"];
+                if (tag_property.ContainsKey("descript"))
+                    descript = tag_property["descript"];
+                dic_group.Add(subpath, new FTagGroup(subpath, tags, descript));
+                tag_property.Clear();
             }
         }
+        #endregion
     }
 }

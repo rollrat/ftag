@@ -56,27 +56,45 @@
             this.tbTags = new System.Windows.Forms.TextBox();
             this.tbFullPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.bGrouping = new System.Windows.Forms.Button();
+            this.tbStagingTags = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lvGroupList = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tbGroupName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lbStagingTags = new System.Windows.Forms.ListBox();
+            this.bGroupLeft = new System.Windows.Forms.Button();
+            this.bGroupRight = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lbGroupPossible = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl3.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // bFolder
@@ -95,11 +113,11 @@
             // 
             this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPath.Location = new System.Drawing.Point(12, 14);
+            this.tbPath.Location = new System.Drawing.Point(127, 14);
             this.tbPath.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.tbPath.Name = "tbPath";
             this.tbPath.ReadOnly = true;
-            this.tbPath.Size = new System.Drawing.Size(1259, 23);
+            this.tbPath.Size = new System.Drawing.Size(1144, 23);
             this.tbPath.TabIndex = 12;
             this.tbPath.Text = "F:\\Game\\Skyrim\\Mods\\Pakage\\Pack1\\Tmp";
             // 
@@ -337,6 +355,262 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "FullPath: ";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tabControl2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1125, 378);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Manage";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage9);
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Location = new System.Drawing.Point(6, 6);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1116, 366);
+            this.tabControl2.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.tabControl3);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1108, 338);
+            this.tabPage2.TabIndex = 0;
+            this.tabPage2.Text = "Merge";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl3.Controls.Add(this.tabPage8);
+            this.tabControl3.Controls.Add(this.tabPage7);
+            this.tabControl3.Location = new System.Drawing.Point(6, 6);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(1096, 332);
+            this.tabControl3.TabIndex = 0;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.bGrouping);
+            this.tabPage8.Controls.Add(this.tbStagingTags);
+            this.tabPage8.Controls.Add(this.label12);
+            this.tabPage8.Controls.Add(this.label11);
+            this.tabPage8.Controls.Add(this.lvGroupList);
+            this.tabPage8.Controls.Add(this.tbGroupName);
+            this.tabPage8.Controls.Add(this.label10);
+            this.tabPage8.Controls.Add(this.lbStagingTags);
+            this.tabPage8.Controls.Add(this.bGroupLeft);
+            this.tabPage8.Controls.Add(this.bGroupRight);
+            this.tabPage8.Controls.Add(this.label9);
+            this.tabPage8.Controls.Add(this.lbGroupPossible);
+            this.tabPage8.Controls.Add(this.label8);
+            this.tabPage8.Location = new System.Drawing.Point(4, 24);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1088, 304);
+            this.tabPage8.TabIndex = 1;
+            this.tabPage8.Text = "Tag Group";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // bGrouping
+            // 
+            this.bGrouping.Location = new System.Drawing.Point(634, 92);
+            this.bGrouping.Name = "bGrouping";
+            this.bGrouping.Size = new System.Drawing.Size(118, 31);
+            this.bGrouping.TabIndex = 12;
+            this.bGrouping.Text = "New or Modify";
+            this.bGrouping.UseVisualStyleBackColor = true;
+            this.bGrouping.Click += new System.EventHandler(this.bGrouping_Click);
+            // 
+            // tbStagingTags
+            // 
+            this.tbStagingTags.Location = new System.Drawing.Point(427, 63);
+            this.tbStagingTags.Name = "tbStagingTags";
+            this.tbStagingTags.ReadOnly = true;
+            this.tbStagingTags.Size = new System.Drawing.Size(325, 23);
+            this.tbStagingTags.TabIndex = 11;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(338, 66);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(83, 15);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Staging Tags: ";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(755, 18);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 15);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Group List: ";
+            // 
+            // lvGroupList
+            // 
+            this.lvGroupList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvGroupList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7});
+            this.lvGroupList.FullRowSelect = true;
+            this.lvGroupList.GridLines = true;
+            this.lvGroupList.Location = new System.Drawing.Point(758, 36);
+            this.lvGroupList.Name = "lvGroupList";
+            this.lvGroupList.Size = new System.Drawing.Size(324, 256);
+            this.lvGroupList.TabIndex = 8;
+            this.lvGroupList.UseCompatibleStateImageBehavior = false;
+            this.lvGroupList.View = System.Windows.Forms.View.Details;
+            this.lvGroupList.DoubleClick += new System.EventHandler(this.lvGroupList_DoubleClick);
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Group Name";
+            this.columnHeader6.Width = 90;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Tags";
+            this.columnHeader7.Width = 198;
+            // 
+            // tbGroupName
+            // 
+            this.tbGroupName.Location = new System.Drawing.Point(427, 36);
+            this.tbGroupName.Name = "tbGroupName";
+            this.tbGroupName.Size = new System.Drawing.Size(325, 23);
+            this.tbGroupName.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(338, 39);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 15);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Group Name: ";
+            // 
+            // lbStagingTags
+            // 
+            this.lbStagingTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbStagingTags.FormattingEnabled = true;
+            this.lbStagingTags.ItemHeight = 15;
+            this.lbStagingTags.Location = new System.Drawing.Point(195, 36);
+            this.lbStagingTags.Name = "lbStagingTags";
+            this.lbStagingTags.Size = new System.Drawing.Size(124, 259);
+            this.lbStagingTags.TabIndex = 5;
+            this.lbStagingTags.SelectedIndexChanged += new System.EventHandler(this.lbStagingTags_SelectedIndexChanged);
+            // 
+            // bGroupLeft
+            // 
+            this.bGroupLeft.Enabled = false;
+            this.bGroupLeft.Location = new System.Drawing.Point(149, 143);
+            this.bGroupLeft.Name = "bGroupLeft";
+            this.bGroupLeft.Size = new System.Drawing.Size(40, 29);
+            this.bGroupLeft.TabIndex = 4;
+            this.bGroupLeft.Text = "<-";
+            this.bGroupLeft.UseVisualStyleBackColor = true;
+            this.bGroupLeft.Click += new System.EventHandler(this.bGroupLeft_Click);
+            // 
+            // bGroupRight
+            // 
+            this.bGroupRight.Enabled = false;
+            this.bGroupRight.Location = new System.Drawing.Point(149, 108);
+            this.bGroupRight.Name = "bGroupRight";
+            this.bGroupRight.Size = new System.Drawing.Size(40, 29);
+            this.bGroupRight.TabIndex = 3;
+            this.bGroupRight.Text = "->";
+            this.bGroupRight.UseVisualStyleBackColor = true;
+            this.bGroupRight.Click += new System.EventHandler(this.bGroupRight_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(192, 18);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 15);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Staging Tags:";
+            // 
+            // lbGroupPossible
+            // 
+            this.lbGroupPossible.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbGroupPossible.FormattingEnabled = true;
+            this.lbGroupPossible.ItemHeight = 15;
+            this.lbGroupPossible.Location = new System.Drawing.Point(19, 36);
+            this.lbGroupPossible.Name = "lbGroupPossible";
+            this.lbGroupPossible.Size = new System.Drawing.Size(124, 259);
+            this.lbGroupPossible.TabIndex = 1;
+            this.lbGroupPossible.SelectedIndexChanged += new System.EventHandler(this.lbGroupPossible_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 18);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(107, 15);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Grouping Possible:";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1088, 304);
+            this.tabPage7.TabIndex = 0;
+            this.tabPage7.Text = "Folder Merge";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1108, 338);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "Verify";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Location = new System.Drawing.Point(4, 24);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(1108, 338);
+            this.tabPage9.TabIndex = 3;
+            this.tabPage9.Text = "Search";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(1108, 338);
+            this.tabPage6.TabIndex = 2;
+            this.tabPage6.Text = "Move";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.pictureBox1);
@@ -380,99 +654,21 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "RollRat Software FTag Gui for Windows";
             // 
-            // tabPage4
+            // label13
             // 
-            this.tabPage4.Controls.Add(this.tabControl2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1125, 378);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Manage";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl2.Controls.Add(this.tabPage2);
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Location = new System.Drawing.Point(6, 6);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1116, 366);
-            this.tabControl2.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.tabControl3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1108, 338);
-            this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "Merge";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1108, 338);
-            this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "Verify";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 24);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1108, 338);
-            this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "Move";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabControl3
-            // 
-            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl3.Controls.Add(this.tabPage7);
-            this.tabControl3.Controls.Add(this.tabPage8);
-            this.tabControl3.Location = new System.Drawing.Point(6, 6);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1096, 326);
-            this.tabControl3.TabIndex = 0;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1088, 298);
-            this.tabPage7.TabIndex = 0;
-            this.tabPage7.Text = "Folder Merge";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Location = new System.Drawing.Point(4, 24);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1088, 298);
-            this.tabPage8.TabIndex = 1;
-            this.tabPage8.Text = "Tag Group";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(109, 15);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Folder to manage: ";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1515, 463);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.bOpen);
             this.Controls.Add(this.tvTags);
@@ -491,13 +687,15 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,6 +741,23 @@
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.ListBox lbStagingTags;
+        private System.Windows.Forms.Button bGroupLeft;
+        private System.Windows.Forms.Button bGroupRight;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox lbGroupPossible;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ListView lvGroupList;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.TextBox tbGroupName;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbStagingTags;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button bGrouping;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.Label label13;
     }
 }
 

@@ -90,6 +90,7 @@ namespace ftag_gui
                     make_node(tvTags.Nodes, f.Name);
                 color_node(tvTags.Nodes);
                 UpdateTagsRank();
+                UpdateManage();
             });
         }
         private void make_tree(FileIndexorNode fn, TreeNode tn)
@@ -171,6 +172,7 @@ namespace ftag_gui
             else
                 tvTags.SelectedNode.ForeColor = Color.Red;
             UpdateTagsRank();
+            UpdateManage();
         }
 
         private void tbTags_KeyDown(object sender, KeyEventArgs e)
@@ -210,7 +212,7 @@ namespace ftag_gui
         {
             lvRank.Items.Clear();
             Dictionary<string, int> rank = new Dictionary<string, int>();
-            foreach (var tag in stream.GetTagList())
+            foreach (var tag in stream.GetObjectList())
             {
                 foreach (string key in tag.Tags)
                 {
@@ -250,7 +252,7 @@ namespace ftag_gui
             lvRelation.Items.Clear();
             relation_tag.Clear();
             List<ListViewItem> lvil = new List<ListViewItem>();
-            List<FTagObject> tag_list = stream.GetTagList();
+            List<FTagObject> tag_list = stream.GetObjectList();
             for (int i = tag_list.Count-1; i >= 0; i--)
             {
                 if ((subset == false && tag_list[i].Intersection(tags)) ||
@@ -297,6 +299,140 @@ namespace ftag_gui
             tvTags.SelectedNode = node;
         }
         #endregion
-       
+
+        #region [--- Manage ---]
+        private void UpdateManage()
+        {
+            UpdateGroup();
+        }
+
+        #region [--- Group ---]
+        private void UpdateGroup()
+        {
+            lbGroupPossible.Items.Clear();
+            lbStagingTags.Items.Clear();
+            lvGroupList.Items.Clear();
+            List<string> tags = new List<string>();
+            foreach(FTagGroup group in stream.GetGroupList()) {
+                StringBuilder builder = new StringBuilder();
+                for (int j = 0; j < group.Tags.Count; j++)
+                {
+                    builder.Append(group.Tags[j]);
+                    if (j != group.Tags.Count - 1)
+                        builder.Append(", ");
+                    if (!tags.Contains(group.Tags[j]))
+                        tags.Add(group.Tags[j]);
+                }
+                lvGroupList.Items.Add(new ListViewItem(new string[] {
+                        Path.GetFileName(group.Name),
+                        builder.ToString()
+                    }));
+            }
+            foreach(string obj in stream.GetTagList()) {
+                if (!tags.Contains(obj))
+                    lbGroupPossible.Items.Add(obj);
+            }
+            lbGroupPossible.Sorted = true;
+        }
+
+        private void bGrouping_Click(object sender, EventArgs e)
+        {
+            if (tbGroupName.Text == "") return;
+            if (tbStagingTags.Text == "") return;
+            if (stream.ExistGroup(tbGroupName.Text) && !tbStagingTags.ReadOnly)
+            {
+                MessageBox.Show("Already exist group name!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<string> tags = new List<String>();
+            foreach (string str in lbStagingTags.Items)
+            {
+                if (str == "") continue;
+                tags.Add(str);
+            }
+
+            stream.SetGroup(tbGroupName.Text, tags);
+            lbStagingTags.Items.Clear();
+            tbStagingTags.Clear();
+            tbGroupName.Clear();
+            tbGroupName.ReadOnly = false;
+            UpdateGroup();
+        }
+
+        private void UpdateStaging()
+        {
+            tbStagingTags.Clear();
+            for (int i = 0; i < lbStagingTags.Items.Count; i++)
+            {
+                tbStagingTags.AppendText((string)lbStagingTags.Items[i]);
+                if (i != lbStagingTags.Items.Count - 1)
+                    tbStagingTags.AppendText(", ");
+            }
+        }
+
+        private void lbGroupPossible_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbGroupPossible.SelectedItem != null)
+            {
+                bGroupRight.Enabled = true;
+            }
+        }
+
+        private void bGroupRight_Click(object sender, EventArgs e)
+        {
+            if (lbGroupPossible.SelectedItem != null)
+            {
+                lbStagingTags.Items.Add((string)lbGroupPossible.SelectedItem);
+                lbGroupPossible.Items.Remove(lbGroupPossible.SelectedItem);
+                UpdateStaging();
+            }
+            bGroupRight.Enabled = false;
+        }
+
+        private void lbStagingTags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbStagingTags.SelectedItem != null)
+            {
+                bGroupLeft.Enabled = true;
+            }
+        }
+
+        private void bGroupLeft_Click(object sender, EventArgs e)
+        {
+            if (lbStagingTags.SelectedItem != null)
+            {
+                lbGroupPossible.Items.Add((string)lbStagingTags.SelectedItem);
+                lbStagingTags.Items.Remove(lbStagingTags.SelectedItem);
+                UpdateStaging();
+            }
+            bGroupLeft.Enabled = false;
+        }
+        
+        private void lvGroupList_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvGroupList.SelectedItems.Count > 0)
+            {
+                if (lbStagingTags.Items.Count > 0) {
+                    MessageBox.Show("Already exist staging member!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (stream.ExistGroup(lvGroupList.SelectedItems[0].Text))
+                {
+                    foreach (string tag in stream.GetGroup(lvGroupList.SelectedItems[0].Text).Tags)
+                        lbStagingTags.Items.Add(tag);
+                    tbGroupName.Text = lvGroupList.SelectedItems[0].Text;
+                    tbGroupName.ReadOnly = true;
+                    UpdateStaging();
+                }
+            }
+        }
+        #endregion
+
+        #region [--- Folder Merge ---]
+        #endregion
+
+        #endregion
     }
 }
