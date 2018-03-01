@@ -312,7 +312,7 @@ namespace ftag_gui
             lbGroupPossible.Items.Clear();
             lbStagingTags.Items.Clear();
             lvGroupList.Items.Clear();
-            List<string> tags = new List<string>();
+            //List<string> tags = new List<string>();
             foreach(FTagGroup group in stream.GetGroupList()) {
                 StringBuilder builder = new StringBuilder();
                 for (int j = 0; j < group.Tags.Count; j++)
@@ -320,8 +320,8 @@ namespace ftag_gui
                     builder.Append(group.Tags[j]);
                     if (j != group.Tags.Count - 1)
                         builder.Append(", ");
-                    if (!tags.Contains(group.Tags[j]))
-                        tags.Add(group.Tags[j]);
+                    //if (!tags.Contains(group.Tags[j]))
+                    //    tags.Add(group.Tags[j]);
                 }
                 lvGroupList.Items.Add(new ListViewItem(new string[] {
                         Path.GetFileName(group.Name),
@@ -329,8 +329,8 @@ namespace ftag_gui
                     }));
             }
             foreach(string obj in stream.GetTagList()) {
-                if (!tags.Contains(obj))
-                    lbGroupPossible.Items.Add(obj);
+                //if (!tags.Contains(obj))
+                lbGroupPossible.Items.Add(obj);
             }
             lbGroupPossible.Sorted = true;
         }
@@ -339,7 +339,7 @@ namespace ftag_gui
         {
             if (tbGroupName.Text == "") return;
             if (tbStagingTags.Text == "") return;
-            if (stream.ExistGroup(tbGroupName.Text) && !tbStagingTags.ReadOnly)
+            if (stream.ExistGroup(tbGroupName.Text) && !tbGroupName.ReadOnly)
             {
                 MessageBox.Show("Already exist group name!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

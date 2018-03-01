@@ -22,13 +22,20 @@ namespace ftag
         
         string source;
         string path;
+        string folder_path;
 
+        #region [--- Init ---]
         public FTagStream(string FolderName)
         {
+            folder_path = FolderName;
+
             if (FolderName.EndsWith("\\"))
                 path = FolderName + ".ftag";
             else
+            {
+                folder_path = FolderName + "\\";
                 path = FolderName + "\\.ftag";
+            }
 
             if (File.Exists(path))
             {
@@ -42,7 +49,9 @@ namespace ftag
             Dictionary<string, string> ftag_property = new Dictionary<string, string>();
             new FTagParser(source, ref dic, ref group, ref ftag_property);
         }
+        #endregion
 
+        #region [--- Object ---]
         public List<string> this[string key]
         {
             get { return dic[key].Tags; }
@@ -70,7 +79,9 @@ namespace ftag
             }
             return tags;
         }
+        #endregion
 
+        #region [--- Group ---]
         public List<FTagGroup> GetGroupList()
         {
             List<FTagGroup> group = new List<FTagGroup>();
@@ -101,7 +112,9 @@ namespace ftag
         {
             return group.ContainsKey(name);
         }
-        
+        #endregion
+
+        #region [--- Tag ---]
         public List<string> GetTagList()
         {
             List<string> tags = new List<string>();
@@ -113,7 +126,9 @@ namespace ftag
             }
             return tags;
         }
+        #endregion
 
+        #region [--- Stream Block Save ---]
         public void Save(bool withFormat = false)
         {
             StringBuilder builder = new StringBuilder();
@@ -147,6 +162,12 @@ namespace ftag
 
             builder.Append("}"); // FTag
             File.WriteAllText(path, builder.ToString());
+        }
+        #endregion
+
+        public FTagVerifier GetVerifier()
+        {
+            return new FTagVerifier(folder_path, dic, group);
         }
     }
 }
