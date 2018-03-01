@@ -1,4 +1,4 @@
-# ftag - file tag manager
+# ftag
 
 ![Image](docs/logo.png)
 
