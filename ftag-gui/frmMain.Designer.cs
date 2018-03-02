@@ -424,6 +424,7 @@
             this.bGrouping.TabIndex = 25;
             this.bGrouping.Text = "New or Modify";
             this.bGrouping.UseVisualStyleBackColor = true;
+            this.bGrouping.Click += new System.EventHandler(this.bGrouping_Click);
             // 
             // tbStagingTags
             // 
@@ -463,10 +464,11 @@
             this.lvGroupList.GridLines = true;
             this.lvGroupList.Location = new System.Drawing.Point(763, 33);
             this.lvGroupList.Name = "lvGroupList";
-            this.lvGroupList.Size = new System.Drawing.Size(324, 295);
+            this.lvGroupList.Size = new System.Drawing.Size(324, 297);
             this.lvGroupList.TabIndex = 21;
             this.lvGroupList.UseCompatibleStateImageBehavior = false;
             this.lvGroupList.View = System.Windows.Forms.View.Details;
+            this.lvGroupList.DoubleClick += new System.EventHandler(this.lvGroupList_DoubleClick);
             // 
             // columnHeader6
             // 
@@ -505,6 +507,7 @@
             this.lbStagingTags.Name = "lbStagingTags";
             this.lbStagingTags.Size = new System.Drawing.Size(124, 289);
             this.lbStagingTags.TabIndex = 18;
+            this.lbStagingTags.SelectedIndexChanged += new System.EventHandler(this.lbStagingTags_SelectedIndexChanged);
             // 
             // bGroupLeft
             // 
@@ -515,6 +518,7 @@
             this.bGroupLeft.TabIndex = 17;
             this.bGroupLeft.Text = "<-";
             this.bGroupLeft.UseVisualStyleBackColor = true;
+            this.bGroupLeft.Click += new System.EventHandler(this.bGroupLeft_Click);
             // 
             // bGroupRight
             // 
@@ -525,6 +529,7 @@
             this.bGroupRight.TabIndex = 16;
             this.bGroupRight.Text = "->";
             this.bGroupRight.UseVisualStyleBackColor = true;
+            this.bGroupRight.Click += new System.EventHandler(this.bGroupRight_Click);
             // 
             // label9
             // 
@@ -545,6 +550,7 @@
             this.lbGroupPossible.Name = "lbGroupPossible";
             this.lbGroupPossible.Size = new System.Drawing.Size(124, 289);
             this.lbGroupPossible.TabIndex = 14;
+            this.lbGroupPossible.SelectedIndexChanged += new System.EventHandler(this.lbGroupPossible_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -593,7 +599,7 @@
             this.lvSearch.GridLines = true;
             this.lvSearch.Location = new System.Drawing.Point(118, 74);
             this.lvSearch.Name = "lvSearch";
-            this.lvSearch.Size = new System.Drawing.Size(822, 254);
+            this.lvSearch.Size = new System.Drawing.Size(822, 256);
             this.lvSearch.TabIndex = 10;
             this.lvSearch.UseCompatibleStateImageBehavior = false;
             this.lvSearch.View = System.Windows.Forms.View.Details;
@@ -684,7 +690,7 @@
             this.lvMove.GridLines = true;
             this.lvMove.Location = new System.Drawing.Point(118, 16);
             this.lvMove.Name = "lvMove";
-            this.lvMove.Size = new System.Drawing.Size(822, 283);
+            this.lvMove.Size = new System.Drawing.Size(822, 285);
             this.lvMove.TabIndex = 11;
             this.lvMove.UseCompatibleStateImageBehavior = false;
             this.lvMove.View = System.Windows.Forms.View.Details;

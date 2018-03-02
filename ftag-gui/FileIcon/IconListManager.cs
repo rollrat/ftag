@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Etier.IconHelper
@@ -63,12 +65,12 @@ namespace Etier.IconHelper
 		/// <returns>Integer of the icon's position in the ImageList</returns>
 		public int AddFileIcon( string filePath )
 		{
-			// Check if the file exists, otherwise, throw exception.
-			// if (!System.IO.File.Exists( filePath )) throw new System.IO.FileNotFoundException("File does not exist");
-			
-			// Split it down so we can get the extension
-			string[] splitPath = filePath.Split(new Char[] {'.'});
-			string extension = (string)splitPath.GetValue( splitPath.GetUpperBound(0) );
+            // Check if the file exists, otherwise, throw exception.
+            // if (!System.IO.File.Exists( filePath )) throw new System.IO.FileNotFoundException("File does not exist");
+
+            // Split it down so we can get the extension
+            string extension = "";
+            extension = Path.GetExtension(filePath);
 				
 			//Check that we haven't already got the extension, if we have, then
 			//return back its index
