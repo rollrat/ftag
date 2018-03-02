@@ -16,7 +16,12 @@ namespace ftag
 {
     public class FTagTool
     {
-        public static object MessageBox { get; private set; }
+        static public string Legalize(string str)
+        {
+            Regex pattern = new Regex(@"[\<\>\!\=\[\]\(\)\{\}\;\:\-\+\^\&\*\%\$\#\@\!\~\`\'\""\/\?\,\.\\]");
+
+            return pattern.Replace(str.Trim().Replace(' ', '_'), "");
+        }
 
         /// <summary>
         /// Get tag list from tags string.

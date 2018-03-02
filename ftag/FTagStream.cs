@@ -95,20 +95,20 @@ namespace ftag
         #region [--- Property ---]
         public bool PropertyExists(string property)
         {
-            return this.property.ContainsKey(property);
+            return this.property.ContainsKey(FTagTool.Legalize(property));
         }
 
         public string GetProperty(string property)
         {
-            return this.property[property];
+            return this.property[FTagTool.Legalize(property)];
         }
 
-        public void AddProperty(string property, string contents)
+        public void SetProperty(string property, string contents)
         {
             if (this.property.ContainsKey(property))
-                this.property[property] = contents;
+                this.property[FTagTool.Legalize(property)] = FTagTool.Legalize(contents);
             else
-                this.property.Add(property, contents);
+                this.property.Add(FTagTool.Legalize(property), FTagTool.Legalize(contents));
         }
         #endregion
 
@@ -183,14 +183,18 @@ namespace ftag
             StringBuilder builder = new StringBuilder();
             builder.Append("{");
 
-            if (property.Count > 0) {
+            if (property.Count > 0)
+            {
                 foreach (var pair in property)
                 {
-                    builder.Append($"\"{pair.Key}\":\"{pair.Value}\",");
+                    builder.Append($"\"{pair.Key}\":\"{pair.Value}\"");
                 }
             }
 
-            if (group.Count > 0) {
+            if (group.Count > 0) 
+            {
+                if (property.Count > 0)
+                    builder.Append(",");
                 builder.Append("\"group\":{");
                 for (int i = 0; i < group.Count; i++)
                 {
@@ -199,18 +203,23 @@ namespace ftag
                     builder.Append(group.ToString());
                     if (i != dic.Count - 1) builder.Append(',');
                 }
-                builder.Append("},");
+                builder.Append("}");
             }
-            
-            builder.Append("\"tags\":{");
-            for (int i = 0; i < dic.Count; i++)
-            {
-                FTagObject obj = dic.ElementAt(i).Value;
 
-                builder.Append(obj.ToString());
-                if (i != dic.Count - 1) builder.Append(',');
+            if (dic.Count > 0)
+            {
+                if (property.Count > 0 || group.Count > 0)
+                    builder.Append(",");
+                builder.Append("\"tags\":{");
+                for (int i = 0; i < dic.Count; i++)
+                {
+                    FTagObject obj = dic.ElementAt(i).Value;
+
+                    builder.Append(obj.ToString());
+                    if (i != dic.Count - 1) builder.Append(',');
+                }
+                builder.Append("}");
             }
-            builder.Append("}");
 
             builder.Append("}");
             File.WriteAllText(path, builder.ToString());
