@@ -50,6 +50,7 @@ namespace ftag_gui
         private void frmMain_Load(object sender, System.EventArgs e)
         {
             cbSearch.Text = "And";
+            Text += " " + FTagVersion.Text;
         }
 
         #region [--- Folder Open ---]
