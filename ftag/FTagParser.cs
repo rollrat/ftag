@@ -116,8 +116,12 @@ namespace ftag
                 }
                 else
                 {
-                    string contents = getString();
-                    dic_property.Add(property, contents);
+                    if (get() == '"')
+                    {
+                        string contents = getString();
+                        dic_property.Add(property, contents);
+                        if (prev() != '"') throw new Exception("Tags parse error.");
+                    }
                 }
             }
         }

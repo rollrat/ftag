@@ -19,6 +19,7 @@ namespace ftag
     {
         Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
         Dictionary<string, FTagGroup> group = new Dictionary<string, FTagGroup>();
+        Dictionary<string, string> property = new Dictionary<string, string>();
         
         string path;
         string folder_path;
@@ -38,8 +39,7 @@ namespace ftag
 
             if (File.Exists(path))
             {
-                Dictionary<string, string> ftag_property = new Dictionary<string, string>();
-                new FTagParser(File.ReadAllText(path), ref dic, ref group, ref ftag_property);
+                new FTagParser(File.ReadAllText(path), ref dic, ref group, ref property);
             }
         }
         
@@ -92,6 +92,26 @@ namespace ftag
         }
         #endregion
 
+        #region [--- Property ---]
+        public bool PropertyExists(string property)
+        {
+            return this.property.ContainsKey(property);
+        }
+
+        public string GetProperty(string property)
+        {
+            return this.property[property];
+        }
+
+        public void AddProperty(string property, string contents)
+        {
+            if (this.property.ContainsKey(property))
+                this.property[property] = contents;
+            else
+                this.property.Add(property, contents);
+        }
+        #endregion
+
         #region [--- Group ---]
         public List<FTagGroup> GetGroupList()
         {
@@ -139,7 +159,7 @@ namespace ftag
         }
         #endregion
 
-        #region [--- Stream Block Save ---]
+        #region [--- Save ---]
         private void sort()
         {
             Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
@@ -162,6 +182,13 @@ namespace ftag
             sort();
             StringBuilder builder = new StringBuilder();
             builder.Append("{");
+
+            if (property.Count > 0) {
+                foreach (var pair in property)
+                {
+                    builder.Append($"\"{pair.Key}\":\"{pair.Value}\",");
+                }
+            }
 
             if (group.Count > 0) {
                 builder.Append("\"group\":{");
