@@ -25,9 +25,10 @@ namespace ftag
             tags = FTagTool.GetTagList(ptags);
             tags.Sort();
         }
-        public FTagObject(string subpath, List<string> ptags)
+        public FTagObject(string subpath, List<string> ptags, string descript = "")
         {
             this.subpath = subpath;
+            this.descript = descript;
             tags = ptags;
             tags.Sort();
         }

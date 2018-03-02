@@ -35,7 +35,7 @@ namespace ccgg
                 RootDirectory += "\\";
             irecu(path);
             directory_list.Sort();
-            node = new FileIndexorNode("root", 0);
+            node = new FileIndexorNode(path, 0);
             inode();
         }
 
@@ -70,7 +70,7 @@ namespace ccgg
         private int index = 0;
         private void inode()
         {
-            for (; index < directory_list.Count; index++)
+            for (; index < directory_list.Count - 1; index++)
             {
                 try
                 {

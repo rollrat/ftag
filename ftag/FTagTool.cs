@@ -217,5 +217,79 @@ namespace ftag
             }
         }
         
+        /// <summary>
+        /// Merge ftag. ( source += target )
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        static public void Merge(
+            ref Dictionary<string, FTagObject> source_object,
+            ref Dictionary<string, FTagGroup> source_group,
+            Dictionary<string, FTagObject> target_object,
+            Dictionary<string, FTagGroup> target_group,
+            string source_path,
+            string target_path)
+        {
+            string additional_path = target_path.Substring(source_path.Length);
+
+            foreach (var pair in target_group)
+                if (source_group.ContainsKey(additional_path + pair.Key))
+                    pair.Value.Tags = pair.Value.Tags.Union(
+                        source_group[additional_path + pair.Key].Tags).ToList();
+                else
+                    source_group.Add(additional_path + pair.Key, pair.Value);
+
+            foreach (var pair in target_object)
+                if (source_object.ContainsKey(additional_path + pair.Key))
+                    pair.Value.Tags = pair.Value.Tags.Union(
+                        source_object[additional_path + pair.Key].Tags).ToList();
+                else
+                    source_object.Add(additional_path + pair.Key, pair.Value);
+        }
+
+        /// <summary>
+        /// Extraction ftag.
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <param name="group"></param>
+        /// <param name="to_path"></param>
+        /// <returns></returns>
+        static public FTagStream Extraction(
+            Dictionary<string, FTagObject> dic,
+            Dictionary<string, FTagGroup> group,
+            string folder_path,
+            string to_subpath)
+        {
+            Dictionary<string, FTagObject> dicc = new Dictionary<string, FTagObject>();
+            Dictionary<string, FTagGroup> groupc = new Dictionary<string, FTagGroup>();
+
+            if (!to_subpath.EndsWith("\\") || !to_subpath.EndsWith("/"))
+                to_subpath += "/";
+
+            to_subpath = to_subpath.Replace("\\", "/");
+
+            foreach (var pair in dic)
+                if (pair.Key.StartsWith(to_subpath))
+                {
+                    FTagObject tmpobj = new FTagObject(
+                        pair.Key.Substring(to_subpath.Length),
+                        pair.Value.Tags,
+                        pair.Value.Descript);
+                    dicc.Add(pair.Key.Substring(to_subpath.Length), tmpobj);
+
+                    foreach (var tag1 in pair.Value.Tags) {
+                        foreach (var g in group)
+                            foreach (var tag2 in g.Value.Tags)
+                                if (tag1 == tag2)
+                                    if (!groupc.ContainsKey(g.Key)) {
+                                        groupc.Add(g.Key, g.Value);
+                                        break;
+                                    }
+                    }
+                }
+
+            return new FTagStream(folder_path + to_subpath, dicc, groupc);
+        }
+
     }
 }

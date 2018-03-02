@@ -20,7 +20,6 @@ namespace ftag
         Dictionary<string, FTagObject> dic = new Dictionary<string, FTagObject>();
         Dictionary<string, FTagGroup> group = new Dictionary<string, FTagGroup>();
         
-        string source;
         string path;
         string folder_path;
 
@@ -39,15 +38,27 @@ namespace ftag
 
             if (File.Exists(path))
             {
-                source = File.ReadAllText(path);
-                parseFTag();
+                Dictionary<string, string> ftag_property = new Dictionary<string, string>();
+                new FTagParser(File.ReadAllText(path), ref dic, ref group, ref ftag_property);
             }
         }
-
-        private void parseFTag()
+        
+        public FTagStream(string folder_path,
+            Dictionary<string, FTagObject> dic,
+            Dictionary<string, FTagGroup> group)
         {
-            Dictionary<string, string> ftag_property = new Dictionary<string, string>();
-            new FTagParser(source, ref dic, ref group, ref ftag_property);
+            this.folder_path = folder_path;
+
+            if (folder_path.EndsWith("\\"))
+                path = folder_path + ".ftag";
+            else
+            {
+                folder_path = folder_path + "\\";
+                path = folder_path + "\\.ftag";
+            }
+
+            this.dic = dic;
+            this.group = group;
         }
         #endregion
 
@@ -187,18 +198,6 @@ namespace ftag
         #endregion
 
         #region [--- Methods ---]
-        public bool RenameTag(string oldTag, string newTag)
-        {
-            if (GetTagList().Contains(newTag)) return false;
-            FTagTool.RenameTag(oldTag, newTag, ref dic, ref group);
-            return true;
-        }
-
-        public void DeleteTag(string tag)
-        {
-            FTagTool.DeleteTag(tag, ref dic, ref group);
-        }
-
         public List<FTagObject> SearchTag(
             List<string> andTags,
             List<string> orTags,
@@ -207,15 +206,41 @@ namespace ftag
             return FTagTool.SearchTag(andTags, orTags, notTags, dic);
         }
 
-        public List<Tuple<string,int>> GetTagRank()
+        public List<Tuple<string, int>> GetTagRank()
         {
             return FTagTool.GetTagRank(dic);
+        }
+
+        public bool RenameTag(string oldTag, string newTag)
+        {
+            if (GetTagList().Contains(newTag)) return false;
+            FTagTool.RenameTag(oldTag, newTag, ref dic, ref group);
+            save();
+            return true;
+        }
+
+        public void DeleteTag(string tag)
+        {
+            FTagTool.DeleteTag(tag, ref dic, ref group);
+            save();
         }
 
         public void Move(List<FTagObject> source, string subpath)
         {
             FTagTool.Move(ref dic, source, folder_path, subpath);
             save();
+        }
+
+        public void Merge(FTagStream stream)
+        {
+            FTagTool.Merge(ref dic, ref group, stream.dic, stream.group, 
+                folder_path, stream.folder_path);
+            save();
+        }
+
+        public void Extract(string subpath)
+        {
+            FTagTool.Extraction(dic, group, folder_path, subpath).save();
         }
         #endregion
     }

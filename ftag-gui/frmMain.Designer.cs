@@ -74,13 +74,24 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lbGroupPossible = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bDeleteTag = new System.Windows.Forms.Button();
+            this.tbDeleteTag = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bRenameTag = new System.Windows.Forms.Button();
+            this.tbRenameNewTag = new System.Windows.Forms.TextBox();
+            this.tbRenameOldTag = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.lvSearch = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tbSearchHelper = new System.Windows.Forms.TextBox();
             this.cbSearch = new System.Windows.Forms.ComboBox();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
@@ -96,16 +107,32 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbExtractionSubFolder = new System.Windows.Forms.TextBox();
+            this.bExtraction = new System.Windows.Forms.Button();
+            this.bFolderMerge = new System.Windows.Forms.Button();
+            this.tbFolderMergeSubFolder = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // bFolder
@@ -127,7 +154,6 @@
             this.tbPath.Location = new System.Drawing.Point(127, 14);
             this.tbPath.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.tbPath.Name = "tbPath";
-            this.tbPath.ReadOnly = true;
             this.tbPath.Size = new System.Drawing.Size(1144, 23);
             this.tbPath.TabIndex = 12;
             this.tbPath.Text = "F:\\Game\\Skyrim\\Mods\\Pakage\\Pack1\\Tmp";
@@ -383,6 +409,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Controls.Add(this.tabPage2);
             this.tabControl2.Controls.Add(this.tabPage9);
             this.tabControl2.Controls.Add(this.tabPage6);
@@ -464,7 +491,7 @@
             this.lvGroupList.GridLines = true;
             this.lvGroupList.Location = new System.Drawing.Point(763, 33);
             this.lvGroupList.Name = "lvGroupList";
-            this.lvGroupList.Size = new System.Drawing.Size(324, 297);
+            this.lvGroupList.Size = new System.Drawing.Size(324, 301);
             this.lvGroupList.TabIndex = 21;
             this.lvGroupList.UseCompatibleStateImageBehavior = false;
             this.lvGroupList.View = System.Windows.Forms.View.Details;
@@ -561,20 +588,145 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Grouping Possible:";
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.groupBox2);
+            this.tabPage7.Controls.Add(this.groupBox1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1108, 338);
+            this.tabPage7.TabIndex = 5;
+            this.tabPage7.Text = "Tag";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(380, 46);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(278, 20);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Danger! Backup \'.ftag\' file before run.";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.bDeleteTag);
+            this.groupBox2.Controls.Add(this.tbDeleteTag);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Location = new System.Drawing.Point(543, 130);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(432, 114);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Delete Tag";
+            // 
+            // bDeleteTag
+            // 
+            this.bDeleteTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDeleteTag.Location = new System.Drawing.Point(305, 48);
+            this.bDeleteTag.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bDeleteTag.Name = "bDeleteTag";
+            this.bDeleteTag.Size = new System.Drawing.Size(110, 23);
+            this.bDeleteTag.TabIndex = 15;
+            this.bDeleteTag.Text = "Delete";
+            this.bDeleteTag.UseVisualStyleBackColor = true;
+            this.bDeleteTag.Click += new System.EventHandler(this.bDeleteTag_Click);
+            // 
+            // tbDeleteTag
+            // 
+            this.tbDeleteTag.Location = new System.Drawing.Point(99, 48);
+            this.tbDeleteTag.Name = "tbDeleteTag";
+            this.tbDeleteTag.Size = new System.Drawing.Size(200, 23);
+            this.tbDeleteTag.TabIndex = 4;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(60, 51);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(33, 15);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Tag: ";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bRenameTag);
+            this.groupBox1.Controls.Add(this.tbRenameNewTag);
+            this.groupBox1.Controls.Add(this.tbRenameOldTag);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Location = new System.Drawing.Point(89, 130);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(432, 114);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rename Tag";
+            // 
+            // bRenameTag
+            // 
+            this.bRenameTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bRenameTag.Location = new System.Drawing.Point(305, 36);
+            this.bRenameTag.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bRenameTag.Name = "bRenameTag";
+            this.bRenameTag.Size = new System.Drawing.Size(110, 59);
+            this.bRenameTag.TabIndex = 14;
+            this.bRenameTag.Text = "Rename";
+            this.bRenameTag.UseVisualStyleBackColor = true;
+            this.bRenameTag.Click += new System.EventHandler(this.bRenameTag_Click);
+            // 
+            // tbRenameNewTag
+            // 
+            this.tbRenameNewTag.Location = new System.Drawing.Point(99, 72);
+            this.tbRenameNewTag.Name = "tbRenameNewTag";
+            this.tbRenameNewTag.Size = new System.Drawing.Size(200, 23);
+            this.tbRenameNewTag.TabIndex = 3;
+            // 
+            // tbRenameOldTag
+            // 
+            this.tbRenameOldTag.Location = new System.Drawing.Point(99, 36);
+            this.tbRenameOldTag.Name = "tbRenameOldTag";
+            this.tbRenameOldTag.Size = new System.Drawing.Size(200, 23);
+            this.tbRenameOldTag.TabIndex = 2;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(36, 75);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 15);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "NewTag: ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(41, 39);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 15);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "OldTag: ";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox4);
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1108, 338);
             this.tabPage2.TabIndex = 0;
-            this.tabPage2.Text = "Merge";
+            this.tabPage2.Text = "Folder";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.label19);
+            this.tabPage9.Controls.Add(this.label18);
             this.tabPage9.Controls.Add(this.lvSearch);
-            this.tabPage9.Controls.Add(this.tbSearchHelper);
             this.tabPage9.Controls.Add(this.cbSearch);
             this.tabPage9.Controls.Add(this.bSearch);
             this.tabPage9.Controls.Add(this.tbSearch);
@@ -597,9 +749,9 @@
             this.columnHeader10});
             this.lvSearch.FullRowSelect = true;
             this.lvSearch.GridLines = true;
-            this.lvSearch.Location = new System.Drawing.Point(118, 74);
+            this.lvSearch.Location = new System.Drawing.Point(118, 60);
             this.lvSearch.Name = "lvSearch";
-            this.lvSearch.Size = new System.Drawing.Size(822, 256);
+            this.lvSearch.Size = new System.Drawing.Size(822, 274);
             this.lvSearch.TabIndex = 10;
             this.lvSearch.UseCompatibleStateImageBehavior = false;
             this.lvSearch.View = System.Windows.Forms.View.Details;
@@ -618,16 +770,6 @@
             // 
             this.columnHeader10.Text = "Tags";
             this.columnHeader10.Width = 376;
-            // 
-            // tbSearchHelper
-            // 
-            this.tbSearchHelper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearchHelper.Location = new System.Drawing.Point(118, 45);
-            this.tbSearchHelper.Name = "tbSearchHelper";
-            this.tbSearchHelper.ReadOnly = true;
-            this.tbSearchHelper.Size = new System.Drawing.Size(822, 23);
-            this.tbSearchHelper.TabIndex = 9;
             // 
             // cbSearch
             // 
@@ -690,7 +832,7 @@
             this.lvMove.GridLines = true;
             this.lvMove.Location = new System.Drawing.Point(118, 16);
             this.lvMove.Name = "lvMove";
-            this.lvMove.Size = new System.Drawing.Size(822, 285);
+            this.lvMove.Size = new System.Drawing.Size(822, 289);
             this.lvMove.TabIndex = 11;
             this.lvMove.UseCompatibleStateImageBehavior = false;
             this.lvMove.View = System.Windows.Forms.View.Details;
@@ -711,8 +853,9 @@
             // 
             // bMove
             // 
+            this.bMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bMove.Enabled = false;
-            this.bMove.Location = new System.Drawing.Point(810, 305);
+            this.bMove.Location = new System.Drawing.Point(810, 307);
             this.bMove.Name = "bMove";
             this.bMove.Size = new System.Drawing.Size(130, 23);
             this.bMove.TabIndex = 1;
@@ -722,8 +865,10 @@
             // 
             // tbMove
             // 
+            this.tbMove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMove.Enabled = false;
-            this.tbMove.Location = new System.Drawing.Point(118, 305);
+            this.tbMove.Location = new System.Drawing.Point(118, 307);
             this.tbMove.Name = "tbMove";
             this.tbMove.Size = new System.Drawing.Size(686, 23);
             this.tbMove.TabIndex = 0;
@@ -780,6 +925,100 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "Folder to manage: ";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(115, 42);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(89, 15);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "<tag>: Include,";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(204, 42);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(93, 15);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "-<tag>: Exclude";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bFolderMerge);
+            this.groupBox3.Controls.Add(this.tbFolderMergeSubFolder);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Location = new System.Drawing.Point(73, 48);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(601, 114);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Folder Merge";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.bExtraction);
+            this.groupBox4.Controls.Add(this.tbExtractionSubFolder);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Location = new System.Drawing.Point(73, 168);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(601, 114);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Extraction";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(39, 56);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(72, 15);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Sub Folder: ";
+            // 
+            // tbExtractionSubFolder
+            // 
+            this.tbExtractionSubFolder.Location = new System.Drawing.Point(117, 52);
+            this.tbExtractionSubFolder.Name = "tbExtractionSubFolder";
+            this.tbExtractionSubFolder.Size = new System.Drawing.Size(361, 23);
+            this.tbExtractionSubFolder.TabIndex = 1;
+            // 
+            // bExtraction
+            // 
+            this.bExtraction.Location = new System.Drawing.Point(484, 52);
+            this.bExtraction.Name = "bExtraction";
+            this.bExtraction.Size = new System.Drawing.Size(90, 23);
+            this.bExtraction.TabIndex = 2;
+            this.bExtraction.Text = "Extract";
+            this.bExtraction.UseVisualStyleBackColor = true;
+            this.bExtraction.Click += new System.EventHandler(this.bExtraction_Click);
+            // 
+            // bFolderMerge
+            // 
+            this.bFolderMerge.Location = new System.Drawing.Point(484, 51);
+            this.bFolderMerge.Name = "bFolderMerge";
+            this.bFolderMerge.Size = new System.Drawing.Size(90, 23);
+            this.bFolderMerge.TabIndex = 5;
+            this.bFolderMerge.Text = "Merge";
+            this.bFolderMerge.UseVisualStyleBackColor = true;
+            this.bFolderMerge.Click += new System.EventHandler(this.bFolderMerge_Click);
+            // 
+            // tbFolderMergeSubFolder
+            // 
+            this.tbFolderMergeSubFolder.Location = new System.Drawing.Point(117, 51);
+            this.tbFolderMergeSubFolder.Name = "tbFolderMergeSubFolder";
+            this.tbFolderMergeSubFolder.Size = new System.Drawing.Size(361, 23);
+            this.tbFolderMergeSubFolder.TabIndex = 4;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(39, 54);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(72, 15);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Sub Folder: ";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -808,6 +1047,13 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
             this.tabPage6.ResumeLayout(false);
@@ -815,6 +1061,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -861,7 +1111,6 @@
         private System.Windows.Forms.Button bSearch;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ComboBox cbSearch;
-        private System.Windows.Forms.TextBox tbSearchHelper;
         private System.Windows.Forms.ListView lvSearch;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
@@ -888,6 +1137,28 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button bDeleteTag;
+        private System.Windows.Forms.TextBox tbDeleteTag;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button bRenameTag;
+        private System.Windows.Forms.TextBox tbRenameNewTag;
+        private System.Windows.Forms.TextBox tbRenameOldTag;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bExtraction;
+        private System.Windows.Forms.TextBox tbExtractionSubFolder;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button bFolderMerge;
+        private System.Windows.Forms.TextBox tbFolderMergeSubFolder;
+        private System.Windows.Forms.Label label21;
     }
 }
 

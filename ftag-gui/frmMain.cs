@@ -67,6 +67,7 @@ namespace ftag_gui
             bFolder.Enabled = false;
             bOpen.Enabled = false;
             bSave.Enabled = true;
+            tbPath.Enabled = false;
 
             stream = new FTagStream(tbPath.Text);
 
@@ -153,6 +154,8 @@ namespace ftag_gui
             if (tvTags.SelectedNode != null)
             {
                 string path = tvTags.SelectedNode.FullPath.Replace('\\', '/');
+                tbFolderMergeSubFolder.Text = path;
+                tbExtractionSubFolder.Text = path;
                 tbFullPath.Text = Path.Combine(tbPath.Text, tvTags.SelectedNode.FullPath);
                 tbTags.Text = "";
                 if (stream.Contains(path)) {
@@ -332,7 +335,6 @@ namespace ftag_gui
             lbGroupPossible.Items.Clear();
             lbStagingTags.Items.Clear();
             lvGroupList.Items.Clear();
-            //List<string> tags = new List<string>();
             foreach(FTagGroup group in stream.GetGroupList()) {
                 StringBuilder builder = new StringBuilder();
                 for (int j = 0; j < group.Tags.Count; j++)
@@ -340,8 +342,6 @@ namespace ftag_gui
                     builder.Append(group.Tags[j]);
                     if (j != group.Tags.Count - 1)
                         builder.Append(", ");
-                    //if (!tags.Contains(group.Tags[j]))
-                    //    tags.Add(group.Tags[j]);
                 }
                 lvGroupList.Items.Add(new ListViewItem(new string[] {
                         Path.GetFileName(group.Name),
@@ -349,7 +349,6 @@ namespace ftag_gui
                     }));
             }
             foreach(string obj in stream.GetTagList()) {
-                //if (!tags.Contains(obj))
                 lbGroupPossible.Items.Add(obj);
             }
             lbGroupPossible.Sorted = true;
@@ -358,7 +357,6 @@ namespace ftag_gui
         private void bGrouping_Click(object sender, EventArgs e)
         {
             if (tbGroupName.Text == "") return;
-            // if (tbStagingTags.Text == "") return;
             if (stream.ExistGroup(tbGroupName.Text) && !tbGroupName.ReadOnly)
             {
                 MessageBox.Show("Already exist group name!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -453,8 +451,40 @@ namespace ftag_gui
         }
         #endregion
 
-        #region [--- Folder Merge ---]
+        #region [--- Tag ---]
+        private void bRenameTag_Click(object sender, EventArgs e)
+        {
+            stream.RenameTag(tbRenameOldTag.Text, tbRenameNewTag.Text);
+            UpdateTreeview();
+        }
+        
+        private void bDeleteTag_Click(object sender, EventArgs e)
+        {
+            stream.DeleteTag(tbDeleteTag.Text);
+            UpdateTreeview();
+        }
+        #endregion
 
+        #region [--- Folder ---]
+        private void bFolderMerge_Click(object sender, EventArgs e)
+        {
+            string folder = tbPath.Text;
+            if (!folder.EndsWith("\\")) folder += "\\";
+            FTagStream target = new FTagStream(folder + tbFolderMergeSubFolder.Text);
+            if (!stream.GetVerifier().VerifyMerge(target.GetVerifier()))
+            {
+                MessageBox.Show("Cannot proceed because some tags of files and groups are not exist in 'SubFolder' fags list. " +
+                    "Please edit the tags in 'SubFolder' to continue.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            stream.Merge(target);
+            UpdateTreeview();
+        }
+
+        private void bExtraction_Click(object sender, EventArgs e)
+        {
+            stream.Extract(tbExtractionSubFolder.Text);
+        }
         #endregion
 
         #region [--- Search ---]
@@ -559,6 +589,7 @@ namespace ftag_gui
             }
             stream.Move(objs, tbMove.Text);
             UpdateTreeview();
+            UpdateSearch();
         }
         #endregion
 

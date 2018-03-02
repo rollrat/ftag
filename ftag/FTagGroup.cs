@@ -25,10 +25,11 @@ namespace ftag
             this.tags.Sort();
         }
 
-        public FTagGroup(string name, List<string> tags)
+        public FTagGroup(string name, List<string> tags, string descript = "")
         {
             group_name = name;
             this.tags = tags;
+            this.descript = descript;
         }
 
         public string Descript

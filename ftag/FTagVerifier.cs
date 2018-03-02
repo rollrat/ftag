@@ -89,20 +89,20 @@ namespace ftag
         {
             if (path.Length > target.path.Length) return false;
             if (!target.path.StartsWith(path)) return false;
-            string additional_path = target.path.Substring(path.Length);
+            string additional_path = target.path.Substring(path.Length).Replace('\\', '/');
 
             // Verify Groups
             foreach (var pair in target.dic_group)
-                if (dic_group.ContainsKey(pair.Key))
-                    if (dic_group[pair.Key].Tags.SequenceEqual(
-                        target.dic_group[pair.Key].Tags))
+                if (dic_group.ContainsKey(additional_path + pair.Key))
+                    if (!dic_group[additional_path + pair.Key].Tags.All(tag =>
+                        target.dic_group[pair.Key].Tags.Contains(tag)))
                         return false;
 
             // Verify objects
             foreach (var pair in target.dic_object)
-                if (dic_object.ContainsKey(pair.Key))
-                    if (dic_object[pair.Key].Tags.SequenceEqual(
-                        target.dic_object[pair.Key].Tags))
+                if (dic_object.ContainsKey(additional_path + pair.Key))
+                    if (!dic_object[additional_path + pair.Key].Tags.All(tag =>
+                        target.dic_object[pair.Key].Tags.Contains(tag)))
                         return false;
 
             return true;
