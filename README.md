@@ -11,7 +11,7 @@ With this program, you can organize your files by tagging them.
 
 `FTagStream` is file-io stream that accesss `.ftag` file.
 All tags are managed by that is created in the selected folder.
-`FTagStream` implements all the functions provided by the library.
+`FTagStream` implements all the functions provided by this library.
 The following code snippet shows how to add and delete tags.
 
 ``` csharp
