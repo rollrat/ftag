@@ -55,7 +55,7 @@ namespace ftag_new
             tag_type.folder_path = Path.Combine(this.folder_name, folder_name);
             tag_type.folder_name = folder_name;
             if (token["tags"] != null) tag_type.tags = new List<string>(token["tags"].ToString().Split(',') ?? null);
-            if (token["descript"] != null) tag_type.tags = new List<string>(token["descript"].ToString().Split(',') ?? null);
+            if (token["descript"] != null) tag_type.descript = token["descript"].ToString();
             tag_type.options = new Dictionary<string, string>();
 
             foreach (var pair in token as JObject)
@@ -75,24 +75,60 @@ namespace ftag_new
             return getType(folder_name, file_name);
         }
         
-        public void SetFolderInfo(string folder_name, List<string> tags)
+        private void setType(TagType tag, string folder_name, string file_name)
         {
-            string make = "";
-            tags.ForEach(x => make += x + ",");
-            make = make.Remove(make.Length - 1);
-
             JToken token = json_data;
             if ((token["folder"] ?? null) is null) (token as JObject).Add("folder", new JObject());
             token = token["folder"];
             if ((token[folder_name] ?? null) is null) (token as JObject).Add(folder_name, new JObject());
             token = token[folder_name];
 
-            if (token["tags"] != null)
-                token["tags"] = make;
-            else
-                (token as JObject).Add(new JProperty("tags", make));
+            if (file_name != "")
+            {
+                if ((token[file_name] ?? null) is null) (token as JObject).Add(file_name, new JObject());
+                token = token[file_name];
+            }
 
+            if (tag.tags.Count > 0)
+            {
+                string make = "";
+                tag.tags.ForEach(x => make += x.Trim() + ",");
+                if (make.Length > 0) make = make.Remove(make.Length - 1);
+
+                if (token["tags"] != null)
+                    token["tags"] = make;
+                else
+                    (token as JObject).Add(new JProperty("tags", make));
+            }
             
+            if (!string.IsNullOrEmpty(tag.descript))
+            {
+                if (tag.descript != "" && token["descript"] != null)
+                    token["descript"] = tag.descript;
+                else
+                    (token as JObject).Add(new JProperty("descript", tag.descript));
+            }
+
+            if (tag.options?.Count > 0)
+            {
+                foreach (var pair in tag.options)
+                {
+                    if (token[pair.Key] != null)
+                        token[pair.Key] = pair.Value;
+                    else
+                        (token as JObject).Add(new JProperty(pair.Key, pair.Value));
+                }
+            }
+        }
+
+        public void SetFolderInfo(TagType tag, string folder_name)
+        {
+            setType(tag, folder_name, "");
+        }
+
+        public void SetFileInfo(TagType tag, string folder_name, string file_name)
+        {
+            setType(tag, folder_name, file_name);
         }
     }
 }

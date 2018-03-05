@@ -25,7 +25,12 @@ namespace ftag_gui
             TagData x = new TagData(@"C:\rollrat");
             x.GetFolderInfo("asdf");
             //x.SetFolderInfo("mgcpp", new List<string>(new string[] { "asdf", "asd" }));
-            x.SetFolderInfo("mgcpp", new List<string>(new string[] { "asdf", "zxcv" }));
+
+            //x.SetFolderInfo("mgcpp", new List<string>(new string[] { "asdf", "zxcv" }));
+            TagType tag = new TagType();
+            tag.tags = new List<string>();
+            tag.tags.Add("asdf");
+            x.SetFolderInfo(tag, "mgcpp");
             x.GetFolderInfo("mgcpp");
             x.Save();
         }
