@@ -6,129 +6,159 @@
 
 ***/
 
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-// JSon Helper
-// https://stackoverflow.com/questions/38558844/jcontainer-jobject-jtoken-and-linq-confusion
 namespace ftag_new
 {
-    public struct TagType
+    public class TagType
     {
-        public string folder_path;
-        public string folder_name;
-        public List<string> tags;
-        public string descript;
-        public Dictionary<string, string> options;
+        [JsonProperty]
+        private List<string> tags;
+        [JsonProperty]
+        private string descript;
+        [JsonExtensionData]
+        private Dictionary<string, object> options;
+
+        public TagType()
+        { options = new Dictionary<string, object>(); tags = new List<string>(); }
+        public IEnumerator GetEnumerator()
+        { return options.GetEnumerator(); }
+        [JsonIgnore]
+        public List<string> Tags
+        { get { return tags; } set { tags = value; } }
+        public string GetDescript()
+        { return descript ?? null; }
+    }
+    
+    public class TagFile
+    {
+        [JsonProperty]
+        TagType info;
+        [JsonExtensionData]
+        private Dictionary<string, object> file_info;
+
+        public TagFile()
+        { file_info = new Dictionary<string, object>(); info = new TagType(); }
+        [JsonIgnore]
+        public TagType this[string index]
+        {
+            get {
+                if (!file_info.ContainsKey(index))
+                    file_info.Add(index, new TagType());
+                return file_info[index] as TagType;
+            } set {
+                if (!file_info.ContainsKey(index))
+                    file_info.Add(index, value);
+                else file_info[index] = value;
+            }
+        }
+        public bool Exists(string file_name)
+        { return file_info.ContainsKey(file_name); }
+        public IEnumerator GetEnumerator()
+        { return file_info.GetEnumerator(); }
+        [JsonIgnore]
+        public TagType Info
+        { get { return info; } set { info = value; } }
+    }
+
+    public class TagFolder
+    {
+        [JsonExtensionData]
+        private Dictionary<string, object> folder_info;
+
+        public TagFolder()
+        { folder_info = new Dictionary<string, object>(); }
+        [JsonIgnore]
+        public TagFile this[string index]
+        {
+            get {
+                if (!folder_info.ContainsKey(index))
+                    folder_info.Add(index, new TagFile());
+                return folder_info[index] as TagFile;
+            } set {
+                if (!folder_info.ContainsKey(index))
+                    folder_info.Add(index, value);
+                else folder_info[index] = value;
+            }
+        }
+        public bool Exists(string folder_name)
+        { return folder_info.ContainsKey(folder_name); }
+        public IEnumerator GetEnumerator()
+        { return folder_info.GetEnumerator(); }
+    }
+
+    public class TagStruct
+    {
+        [JsonExtensionData]
+        private Dictionary<string, object> other_data;
+        [JsonProperty]
+        private TagFolder folder;
+
+        public TagStruct() {
+            other_data = new Dictionary<string, object>();
+            folder = new TagFolder();
+        }
+
+        [JsonIgnore]
+        public TagFolder Folder
+        { get { return folder; } set { folder = value; } }
+        [JsonIgnore]
+        public string this[string index]
+        {
+            get {
+                if (!other_data.ContainsKey(index))
+                    other_data.Add(index, "");
+                return other_data[index] as string;
+            } set {
+                if (!other_data.ContainsKey(index))
+                    other_data.Add(index, value);
+                else other_data[index] = value;
+            }
+        }
+        public bool Exists(string index)
+        { return other_data.ContainsKey(index); }
+        public IEnumerator GetEnumerator()
+        { return other_data.GetEnumerator(); }
     }
     
     public class TagData
     {
         string folder_name;
-        JObject json_data;
+        TagStruct myStruct;
 
         private string get_path() { return Path.Combine(folder_name, "tags.json"); }
         public TagData(string folder_name)
         {
             this.folder_name = folder_name;
-
-            if (File.Exists(get_path()))
-                json_data = JObject.Parse(File.ReadAllText(get_path()));
-            else
-                json_data = new JObject();
+            if (File.Exists(get_path())) myStruct = JsonConvert.DeserializeObject<TagStruct>(File.ReadAllText(get_path()));
+            if (myStruct == null) myStruct = new TagStruct();
         }
 
         public void Save()
         {
-            File.WriteAllText(get_path(), json_data.ToString());
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Converters.Add(new JavaScriptDateTimeConverter());
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+
+            using (StreamWriter sw = new StreamWriter(get_path()))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, myStruct);
+            }
         }
 
-        private TagType? getType(string folder_name, string file_name)
+        public ref TagStruct GetTag()
         {
-            JToken token = json_data;
-            if ((token = token["folder"] ?? null) is null) return null;
-            if ((token = token[folder_name] ?? null) is null) return null;
-            if (file_name != "" && (token = token[file_name] ?? null) is null) return null;
-
-            TagType tag_type = new TagType();
-            tag_type.folder_path = Path.Combine(this.folder_name, folder_name);
-            tag_type.folder_name = folder_name;
-            if (token["tags"] != null) tag_type.tags = new List<string>(token["tags"].ToString().Split(',') ?? null);
-            if (token["descript"] != null) tag_type.descript = token["descript"].ToString();
-            tag_type.options = new Dictionary<string, string>();
-
-            foreach (var pair in token as JObject)
-                if (pair.Key != "tags" && pair.Key != "descript")
-                    tag_type.options.Add(pair.Key, pair.Value.ToString());
-
-            return tag_type;
-        }
-
-        public TagType? GetFolderInfo(string folder_name)
-        {
-            return getType(folder_name, "");
-        }
-
-        public TagType? GetFileInfo(string folder_name, string file_name)
-        {
-            return getType(folder_name, file_name);
+            return ref myStruct;
         }
         
-        private void setType(TagType tag, string folder_name, string file_name)
+        public void SetTag(TagStruct tag)
         {
-            JToken token = json_data;
-            if ((token["folder"] ?? null) is null) (token as JObject).Add("folder", new JObject());
-            token = token["folder"];
-            if ((token[folder_name] ?? null) is null) (token as JObject).Add(folder_name, new JObject());
-            token = token[folder_name];
-
-            if (file_name != "")
-            {
-                if ((token[file_name] ?? null) is null) (token as JObject).Add(file_name, new JObject());
-                token = token[file_name];
-            }
-
-            if (tag.tags.Count > 0)
-            {
-                string make = "";
-                tag.tags.ForEach(x => make += x.Trim() + ",");
-                if (make.Length > 0) make = make.Remove(make.Length - 1);
-
-                if (token["tags"] != null)
-                    token["tags"] = make;
-                else
-                    (token as JObject).Add(new JProperty("tags", make));
-            }
-            
-            if (!string.IsNullOrEmpty(tag.descript))
-            {
-                if (tag.descript != "" && token["descript"] != null)
-                    token["descript"] = tag.descript;
-                else
-                    (token as JObject).Add(new JProperty("descript", tag.descript));
-            }
-
-            if (tag.options?.Count > 0)
-            {
-                foreach (var pair in tag.options)
-                {
-                    if (token[pair.Key] != null)
-                        token[pair.Key] = pair.Value;
-                    else
-                        (token as JObject).Add(new JProperty(pair.Key, pair.Value));
-                }
-            }
-        }
-
-        public void SetFolderInfo(TagType tag, string folder_name)
-        {
-            setType(tag, folder_name, "");
-        }
-
-        public void SetFileInfo(TagType tag, string folder_name, string file_name)
-        {
-            setType(tag, folder_name, file_name);
+            myStruct = tag;
         }
     }
 }

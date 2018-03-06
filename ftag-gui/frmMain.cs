@@ -9,6 +9,7 @@
 using ccgg;
 using Etier.IconHelper;
 using ftag;
+using ftag_new;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -595,5 +596,19 @@ namespace ftag_gui
 
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // ftag to .json tagfile.
+            TagData tag_data = new TagData(@"C:\rollrat\");
+            TagStruct tmp = new TagStruct();
+            foreach (FTagObject obj in stream.GetObjectList())
+            {
+                string path = obj.SubPath;
+                if (path.EndsWith("/")) continue;
+                tmp.Folder[path.Remove(path.LastIndexOf('/'))][path.Substring(path.LastIndexOf('/')+1)].Tags = obj.Tags;
+            }
+            tag_data.SetTag(tmp);
+            tag_data.Save();
+        }
     }
 }

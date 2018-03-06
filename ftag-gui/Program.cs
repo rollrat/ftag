@@ -16,7 +16,7 @@ namespace ftag_gui
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTest());
+            Application.Run(new frmMain());
         }
     }
 }

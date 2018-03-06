@@ -87,7 +87,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bExtraction = new System.Windows.Forms.Button();
+            this.tbExtractionSubFolder = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bFolderMerge = new System.Windows.Forms.Button();
+            this.tbFolderMergeSubFolder = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.lvSearch = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -107,16 +117,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbExtractionSubFolder = new System.Windows.Forms.TextBox();
-            this.bExtraction = new System.Windows.Forms.Button();
-            this.bFolderMerge = new System.Windows.Forms.Button();
-            this.tbFolderMergeSubFolder = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -127,12 +128,12 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // bFolder
@@ -491,7 +492,7 @@
             this.lvGroupList.GridLines = true;
             this.lvGroupList.Location = new System.Drawing.Point(763, 33);
             this.lvGroupList.Name = "lvGroupList";
-            this.lvGroupList.Size = new System.Drawing.Size(324, 301);
+            this.lvGroupList.Size = new System.Drawing.Size(324, 303);
             this.lvGroupList.TabIndex = 21;
             this.lvGroupList.UseCompatibleStateImageBehavior = false;
             this.lvGroupList.View = System.Windows.Forms.View.Details;
@@ -722,6 +723,82 @@
             this.tabPage2.Text = "Folder";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.bExtraction);
+            this.groupBox4.Controls.Add(this.tbExtractionSubFolder);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Location = new System.Drawing.Point(73, 168);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(601, 114);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Extraction";
+            // 
+            // bExtraction
+            // 
+            this.bExtraction.Location = new System.Drawing.Point(484, 52);
+            this.bExtraction.Name = "bExtraction";
+            this.bExtraction.Size = new System.Drawing.Size(90, 23);
+            this.bExtraction.TabIndex = 2;
+            this.bExtraction.Text = "Extract";
+            this.bExtraction.UseVisualStyleBackColor = true;
+            this.bExtraction.Click += new System.EventHandler(this.bExtraction_Click);
+            // 
+            // tbExtractionSubFolder
+            // 
+            this.tbExtractionSubFolder.Location = new System.Drawing.Point(117, 52);
+            this.tbExtractionSubFolder.Name = "tbExtractionSubFolder";
+            this.tbExtractionSubFolder.Size = new System.Drawing.Size(361, 23);
+            this.tbExtractionSubFolder.TabIndex = 1;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(39, 56);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(72, 15);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Sub Folder: ";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bFolderMerge);
+            this.groupBox3.Controls.Add(this.tbFolderMergeSubFolder);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Location = new System.Drawing.Point(73, 48);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(601, 114);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Folder Merge";
+            // 
+            // bFolderMerge
+            // 
+            this.bFolderMerge.Location = new System.Drawing.Point(484, 51);
+            this.bFolderMerge.Name = "bFolderMerge";
+            this.bFolderMerge.Size = new System.Drawing.Size(90, 23);
+            this.bFolderMerge.TabIndex = 5;
+            this.bFolderMerge.Text = "Merge";
+            this.bFolderMerge.UseVisualStyleBackColor = true;
+            this.bFolderMerge.Click += new System.EventHandler(this.bFolderMerge_Click);
+            // 
+            // tbFolderMergeSubFolder
+            // 
+            this.tbFolderMergeSubFolder.Location = new System.Drawing.Point(117, 51);
+            this.tbFolderMergeSubFolder.Name = "tbFolderMergeSubFolder";
+            this.tbFolderMergeSubFolder.Size = new System.Drawing.Size(361, 23);
+            this.tbFolderMergeSubFolder.TabIndex = 4;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(39, 54);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(72, 15);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Sub Folder: ";
+            // 
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.label19);
@@ -738,6 +815,24 @@
             this.tabPage9.Text = "Search";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(204, 42);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(93, 15);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "-<tag>: Exclude";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(115, 42);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(89, 15);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "<tag>: Include,";
+            // 
             // lvSearch
             // 
             this.lvSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -751,7 +846,7 @@
             this.lvSearch.GridLines = true;
             this.lvSearch.Location = new System.Drawing.Point(118, 60);
             this.lvSearch.Name = "lvSearch";
-            this.lvSearch.Size = new System.Drawing.Size(822, 274);
+            this.lvSearch.Size = new System.Drawing.Size(822, 276);
             this.lvSearch.TabIndex = 10;
             this.lvSearch.UseCompatibleStateImageBehavior = false;
             this.lvSearch.View = System.Windows.Forms.View.Details;
@@ -832,7 +927,7 @@
             this.lvMove.GridLines = true;
             this.lvMove.Location = new System.Drawing.Point(118, 16);
             this.lvMove.Name = "lvMove";
-            this.lvMove.Size = new System.Drawing.Size(822, 289);
+            this.lvMove.Size = new System.Drawing.Size(822, 291);
             this.lvMove.TabIndex = 11;
             this.lvMove.UseCompatibleStateImageBehavior = false;
             this.lvMove.View = System.Windows.Forms.View.Details;
@@ -855,7 +950,7 @@
             // 
             this.bMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bMove.Enabled = false;
-            this.bMove.Location = new System.Drawing.Point(810, 307);
+            this.bMove.Location = new System.Drawing.Point(810, 309);
             this.bMove.Name = "bMove";
             this.bMove.Size = new System.Drawing.Size(130, 23);
             this.bMove.TabIndex = 1;
@@ -868,13 +963,14 @@
             this.tbMove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMove.Enabled = false;
-            this.tbMove.Location = new System.Drawing.Point(118, 307);
+            this.tbMove.Location = new System.Drawing.Point(118, 309);
             this.tbMove.Name = "tbMove";
             this.tbMove.Size = new System.Drawing.Size(686, 23);
             this.tbMove.TabIndex = 0;
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
@@ -925,99 +1021,15 @@
             this.label13.TabIndex = 17;
             this.label13.Text = "Folder to manage: ";
             // 
-            // label18
+            // button1
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(115, 42);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 15);
-            this.label18.TabIndex = 11;
-            this.label18.Text = "<tag>: Include,";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(204, 42);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(93, 15);
-            this.label19.TabIndex = 12;
-            this.label19.Text = "-<tag>: Exclude";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.bFolderMerge);
-            this.groupBox3.Controls.Add(this.tbFolderMergeSubFolder);
-            this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Location = new System.Drawing.Point(73, 48);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(601, 114);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Folder Merge";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.bExtraction);
-            this.groupBox4.Controls.Add(this.tbExtractionSubFolder);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Location = new System.Drawing.Point(73, 168);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(601, 114);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Extraction";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(39, 56);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(72, 15);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Sub Folder: ";
-            // 
-            // tbExtractionSubFolder
-            // 
-            this.tbExtractionSubFolder.Location = new System.Drawing.Point(117, 52);
-            this.tbExtractionSubFolder.Name = "tbExtractionSubFolder";
-            this.tbExtractionSubFolder.Size = new System.Drawing.Size(361, 23);
-            this.tbExtractionSubFolder.TabIndex = 1;
-            // 
-            // bExtraction
-            // 
-            this.bExtraction.Location = new System.Drawing.Point(484, 52);
-            this.bExtraction.Name = "bExtraction";
-            this.bExtraction.Size = new System.Drawing.Size(90, 23);
-            this.bExtraction.TabIndex = 2;
-            this.bExtraction.Text = "Extract";
-            this.bExtraction.UseVisualStyleBackColor = true;
-            this.bExtraction.Click += new System.EventHandler(this.bExtraction_Click);
-            // 
-            // bFolderMerge
-            // 
-            this.bFolderMerge.Location = new System.Drawing.Point(484, 51);
-            this.bFolderMerge.Name = "bFolderMerge";
-            this.bFolderMerge.Size = new System.Drawing.Size(90, 23);
-            this.bFolderMerge.TabIndex = 5;
-            this.bFolderMerge.Text = "Merge";
-            this.bFolderMerge.UseVisualStyleBackColor = true;
-            this.bFolderMerge.Click += new System.EventHandler(this.bFolderMerge_Click);
-            // 
-            // tbFolderMergeSubFolder
-            // 
-            this.tbFolderMergeSubFolder.Location = new System.Drawing.Point(117, 51);
-            this.tbFolderMergeSubFolder.Name = "tbFolderMergeSubFolder";
-            this.tbFolderMergeSubFolder.Size = new System.Drawing.Size(361, 23);
-            this.tbFolderMergeSubFolder.TabIndex = 4;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(39, 54);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(72, 15);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "Sub Folder: ";
+            this.button1.Location = new System.Drawing.Point(840, 125);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(179, 41);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
@@ -1054,6 +1066,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
             this.tabPage6.ResumeLayout(false);
@@ -1061,10 +1077,6 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1159,6 +1171,7 @@
         private System.Windows.Forms.Button bFolderMerge;
         private System.Windows.Forms.TextBox tbFolderMergeSubFolder;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button button1;
     }
 }
 
