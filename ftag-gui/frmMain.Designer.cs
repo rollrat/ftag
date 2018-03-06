@@ -117,7 +117,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -970,7 +969,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
@@ -1020,16 +1018,6 @@
             this.label13.Size = new System.Drawing.Size(109, 15);
             this.label13.TabIndex = 17;
             this.label13.Text = "Folder to manage: ";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(840, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(179, 41);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
@@ -1171,7 +1159,6 @@
         private System.Windows.Forms.Button bFolderMerge;
         private System.Windows.Forms.TextBox tbFolderMergeSubFolder;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button button1;
     }
 }
 

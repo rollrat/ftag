@@ -9,7 +9,6 @@
 using ccgg;
 using Etier.IconHelper;
 using ftag;
-using ftag_new;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

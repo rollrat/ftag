@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ftag", "ftag\ftag.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ftag-gui", "ftag-gui\ftag-gui.csproj", "{E47461EE-F633-478C-85B4-9E97C884B926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ftag-new", "ftag-new\ftag-new.csproj", "{F59414D0-E5A1-47AB-9365-BC340E84357B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{E47461EE-F633-478C-85B4-9E97C884B926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E47461EE-F633-478C-85B4-9E97C884B926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E47461EE-F633-478C-85B4-9E97C884B926}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F59414D0-E5A1-47AB-9365-BC340E84357B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F59414D0-E5A1-47AB-9365-BC340E84357B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F59414D0-E5A1-47AB-9365-BC340E84357B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F59414D0-E5A1-47AB-9365-BC340E84357B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
